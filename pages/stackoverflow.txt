@@ -1,0 +1,9 @@
+titre: Wikipédia - L'encyclopédie libre
+
+contenu: 
+"
+Le but de cette première page est de visualiser 
+comment mettre en place notre moteur de recherche
+"
+
+pointeurvers: reddit.txt
