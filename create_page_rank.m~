@@ -1,0 +1,13 @@
+% Déterminer le page_rank
+
+%{
+create_page_rank va déterminer le rang (stable) des pages
+
+%}
+
+function create_page_rank(popularite, )
+
+
+
+
+end

@@ -1,0 +1,11 @@
+titre: Première page Google créée
+
+contenu: 
+"
+Le but de cette première page est de visualiser 
+comment mettre en place notre moteur de recherche
+"
+pointeurvers: deuxieme.txt
+pointeurvers: troisieme.txt
+pointeurvers: quatrieme.txt
+
