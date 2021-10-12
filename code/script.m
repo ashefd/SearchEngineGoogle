@@ -7,23 +7,22 @@ path = '../pages/';
 
 % number of pages for this exemple
 n = count_Nb_Pages(path); 
-
-% Vecteur de popularité P
-P = zeros(n,1);
-
-% Vecteur order permettant de checker par la suite si besoin l'ordre des
-% fichiers
+    
+% Vecteur order permettant de checker par la suite si besoin l'ordre des fichiers
 % Matrice de probabilité d'aller vers chaque page M
 [M, order] = init_markov_chain(n, path) % c'est le nombre de pages qui référence d'autre en proba
 
+% Vecteur de popularité P
+% Pour l'instant, on a décidé de faire quelque chose d'aléatoire
+P = randi([1 100],n,1,'int8')
+
 % Matrice de page_rank PR
-PR = create_page_rank(P, M, path); % Première initialisation
-PR = update_page_rank(PR, P, M, path); % update
+%PR = create_page_rank(P, M, path); % Première initialisation
+%PR = update_page_rank(PR, P, M, path); % update
 
 %% Display search page %%
 
-
-% call script to display pages
+display_search_engine(); % call script to display pages
 
 
 

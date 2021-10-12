@@ -1,10 +1,10 @@
-titre: Wikipédia - L'encyclopédie libre
+titre: What exactly is the difference between a pointer and an array? - Reddit
 
 contenu: 
-"
+
 Le but de cette première page est de visualiser 
 comment mettre en place notre moteur de recherche
-"
+
 pointeurvers: stackoverflow.txt
 pointeurvers: medium.txt
 pointeurvers: reddit.txt

@@ -1,5 +1,10 @@
-% set according to references
+%% init_markov_chain permet de créer la matrice de proba de passer d'une page web à une autre %%
 
+
+%set according to references 
+
+% M : La matrice M de proba (markov chain)
+% order : vecteur contenant dans l'ordre les pages traitées
 function [M, order] = init_markov_chain(n, path)
     L = zeros(n,n);
     alpha = 0.85;

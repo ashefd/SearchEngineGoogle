@@ -1,4 +1,4 @@
-titre: Wikipédia - L'encyclopédie libre
+titre: Why should I use a pointer rather than the object itself? - Stack Overflow
 
 contenu: 
 "
