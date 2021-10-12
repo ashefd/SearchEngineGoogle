@@ -1,8 +1,21 @@
-titre: Pointers and dynamic memory - stack vs heap - YouTube
+titre: Math circles, des maths pour le plaisir | ARTE - YouTube - Google
 
-contenu: 
-"
-Le but de cette première page est de visualiser 
-comment mettre en place notre moteur de recherche
-"
+contenu:
+
+A Berlin, Berkeley ou Moscou, des groupes d'élèves se retrouvent avec un professeur dans les "Math circles" pour réfléchir en groupe à des problèmes mathématiques. Dans la joie et la bonne humeur grâce à des méthodes peu conventionnelles.
+
+Disponible jusqu'au 31/03/2022
+
+#Maths #Méthode #ARTE
+
+
+
+Abonnez-vous à la chaîne ARTE https://www.youtube.com/channel/UCwI-...
+
+Suivez-nous sur les réseaux !
+Facebook : http://www.facebook.com/artetv
+Twitter : http://www.twitter.com/artefr
+Instagram : https://www.instagram.com/artefr
+
+
 pointeurvers: stackoverflow.txt
