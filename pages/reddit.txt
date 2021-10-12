@@ -1,10 +1,13 @@
-titre: What exactly is the difference between a pointer and an array? - Reddit
+title: Juan - Reddit
 
-contenu: 
+content: 
+Juan is an amazing horses. Juan is friend.
+I love Juan. Who doesn't ?
 
-Le but de cette première page est de visualiser 
-comment mettre en place notre moteur de recherche
+Juan is love.
+Love is Juan.
 
-pointeurvers: stackoverflow.txt
-pointeurvers: medium.txt
-pointeurvers: reddit.txt
+Everywhere I go, I can see people talk about Juan. I went on pointeurvers: stackoverflow.txt and I thought that he is an incredible horse.
+You can even see him there pointeurvers: youtube.txt. Even pointeurvers: wikipedia.txt knows him.
+
+Please go check on him. He might need some love <3

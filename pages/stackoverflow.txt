@@ -1,9 +1,7 @@
-titre: Why should I use a pointer rather than the object itself? - Stack Overflow
+title: How code - Stack Overflow
 
-contenu: 
-"
-Le but de cette première page est de visualiser 
-comment mettre en place notre moteur de recherche
-"
+content: 
+Hello ! I am trying to code something. PLS HELP
+I want to create a matrix out of an image of Juan.
+can somebody help me ???
 
-pointeurvers: reddit.txt

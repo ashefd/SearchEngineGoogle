@@ -36,11 +36,14 @@ function [M, order] = init_markov_chain(n, path)
             end
         end
         for x = 1:n
-            L(x,i) = L(x,i)/taille(2);  
+            if(taille(2) ~= 0)
+                L(x,i) = L(x,i)/taille(2);  
+            end
         end
     end
     
     S = L;
+    
     for i = 1:n
         sum = 0;
         for j = 1:n
@@ -48,12 +51,12 @@ function [M, order] = init_markov_chain(n, path)
         end
         if sum == 0
             for x = 1:n
-                for y = 1:n
-                    S(j,i) = 1/n;
-                end
+                    S(x,i) = 1/n;
+                
             end
         end
     end
+    
     
     M = alpha * S + (1-alpha) * ones(n,n)/n;
 end

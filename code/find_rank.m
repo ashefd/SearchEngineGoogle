@@ -16,7 +16,7 @@ recherché ainsi que le nombre d'itération
 On multiplie le nombre de points par le nombre d'itération en fonction des
 différents lieux d'apparition.
 %}
-function find_rank(word, path, M)
+function R = find_rank(word, path, M)
     
 
 end
