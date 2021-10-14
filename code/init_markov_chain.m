@@ -11,7 +11,7 @@ function [M, order] = init_markov_chain(n, path)
     files = dir(fullfile(path, '*.txt'));
     
     % On initialise le vecteur "order"
-    order = strings(n);
+    order = strings(n,1);
     for i = 1:n
         order(i) = extractBetween(files(i).name , 1, '.txt' );
     end
@@ -58,5 +58,6 @@ function [M, order] = init_markov_chain(n, path)
     end
     
     
-    M = alpha * S + (1-alpha) * ones(n,n)/n;
+    M = alpha * S + (1-alpha) * ones(n)/n;
+ 
 end

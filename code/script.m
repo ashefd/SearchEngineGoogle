@@ -6,11 +6,11 @@
 path = '../pages/';
 
 % number of pages for this exemple
-n = count_Nb_Pages(path) 
+n = count_Nb_Pages(path);
     
 % Vecteur order permettant de checker par la suite si besoin l'ordre des fichiers
 % Matrice de probabilité d'aller vers chaque page M
-[M, order] = init_markov_chain(n, path) % c'est le nombre de pages qui référence d'autre en proba
+[M, order] = init_markov_chain(n, path); % c'est le nombre de pages qui référence d'autre en proba
 
 % Vecteur de popularité P
 % Pour l'instant, on a décidé de faire quelque chose d'aléatoire
@@ -30,10 +30,9 @@ word = 'Juan';
 %% Si on fait une recherche d'un mot %%
 
 
-% Vecteur rang en fonction d'une recherche R
-
-R = find_rank(word, path, M); % donne l'ordre de pertinence de chaque page
-%R = sort_page_search(R, path); % on ordonne par pertinence les pages
+% 
+StablePR = find_rank(n, path, M); % donne l'ordre de pertinence de chaque page
+result = sort_page_search(word, StablePR, path, order, n) % on ordonne par pertinence les pages
 %Vecteur P à modifier à chaque clic sur une page
 
 % fonction display des résultats
