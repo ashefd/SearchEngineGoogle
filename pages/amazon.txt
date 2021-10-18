@@ -1,0 +1,5 @@
+titre: Achetez tout et n'importe quoi - Amazon
+
+contenu:
+Rien mdr
+pointeurvers : mamiton.txt

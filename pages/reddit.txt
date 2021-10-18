@@ -1,7 +1,7 @@
 title: Juan - Reddit
 
 content: 
-Juan is an amazing horses. Juan is friend.
+Juan is an amazing horse. Juan is friend.
 I love Juan. Who doesn't ?
 
 Juan is love.

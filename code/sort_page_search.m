@@ -22,7 +22,7 @@ différents lieux d'apparition.
 % google
 function result = sort_page_search(word, StablePR, path, order, n) % Peut etre que l'on peut supprimer order de notre fonction
     files = dir(fullfile(path, '*.txt'));
-    wordInside = [""];
+    wordInside = strings(0,0);
     
     for i = 1:n % pour chaque fichier dans le dossier choisi
         thisfile = files(i).name;
@@ -32,34 +32,24 @@ function result = sort_page_search(word, StablePR, path, order, n) % Peut etre q
         matches = regexp(text,word,'match');
         taille = size(matches);
         
-        wordInside(end + 1) = extractBetween(thisfile, 1, '.txt' );
+        if(taille ~= 0)
+            wordInside(end + 1) = extractBetween(thisfile, 1, '.txt' );
+        end
     end
-    %disp(wordInside);
-    taille = size(wordInside);
+    
+    tailleWordInside = size(wordInside);
 
-    [B,p] = sort(StablePR,'descend');
-    tailleB = size(B);
+    [sortedPR,pr] = sort(StablePR,'descend');
+    tailleSortedPR = size(sortedPR);
+ 
+    result = strings(0,0); 
     
-    %{
-    disp(StablePR);
-    disp(order);
-    disp(B);
-    disp(p);
-    disp(wordInside);
-    %}
-    %disp(tailleB(1));
-    
-    
-    result = strings(1, taille(2)); % ok
-    
-    for i = 1 : tailleB(1)
-        %disp(order(p(i)), '\n');
-        for j = 1:taille
-            %disp('abc : ');
-            disp(wordInside(j));
-            %disp('def : ');
-            if( order(p(i)) == wordInside(j))
-                result(p(i)) = wordInside(j);
+    for i = 1 : tailleSortedPR(1)
+        for j = 1:tailleWordInside(2)
+            
+            if( order(pr(i)) == wordInside(j)) 
+                result(end + 1) = wordInside(j);
+              
             end
         end
     end

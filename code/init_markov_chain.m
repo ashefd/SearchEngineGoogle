@@ -5,9 +5,8 @@
 
 % M : La matrice M de proba (markov chain)
 % order : vecteur contenant dans l'ordre les pages traitées
-function [M, order] = init_markov_chain(n, path)
+function [M, order] = init_markov_chain(n, path, alpha)
     L = zeros(n,n);
-    alpha = 0.85;
     files = dir(fullfile(path, '*.txt'));
     
     % On initialise le vecteur "order"
