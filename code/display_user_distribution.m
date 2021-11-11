@@ -1,79 +1,99 @@
-
-function display_user_distribution(order, P, n, M)
-
-    f = figure(2);  
-        
-    clf;
+%% Function display_user_distribution
+% order : order of the web site we want to evaluate
+% P : population vector
+% n : number of web site
+% M : Google matrix
+function display_user_distribution(TotalFrame, order, P, n, M, ax1, ax2)
     
-    xlim([0 50])
-    ylim([0 50])
-
-    P = randi([1 100],n,1,'double');
-    disp(P);
-    r = 1;
-    x = randi([10 40],n,1,'double');
-    y = randi([10 40],n,1,'double');
-    c = rand(n,1);
+    %f = figure;
+    %g = figure;
+    
+    
+    % Mis en place de la position de la population dans chaque site
+    angles = linspace(0, 2*pi, 360); % 360 is the total number of points
+    radius = 80; % rayon du grand cercle
+    xCenter = 110;
+    yCenter = 110;
+    x = radius * cos(angles) + xCenter; 
+    y = radius * sin(angles) + yCenter;
+    c = rand(n, 3);
+    
+    totalEvolution = zeros(n,1);
+    
+    %  Mis en place d'une animation
     animationWriter = VideoWriter('animation_file');
     open(animationWriter);
-    
-    
-    for numberOfFrames=1:100
-      % create data for circle plot or any other processing you want to do
-        clf;
+
+    for numberOfFrames=1:TotalFrame
+        totalEvolution(:,numberOfFrames) = P;
+
+        %set(0, 'CurrentFigure', g)
+        cla(ax1);
+        cla(ax2);
+        % Make the figure static
+        axis equal;
+        axis manual;
+        %axis([0 250 -20 numberOfFrames]);
+        xAxis = linspace(0, TotalFrame, numberOfFrames );
+        axes('ColorOrder',c,'NextPlot','replacechildren') 
+        %g.Position = [1000 500 500 500];
+        
+        plot(ax2, xAxis, totalEvolution');
+        
+        
+        %set(0, 'CurrentFigure', f)
+        %clf;
+        %f.Position = [500 500 500 500];
+        % Make the figure static
+        %axis equal;
+        %axis manual;
+        %axis([-20 250 -20 250]);
+        
+        % Choose web site circle position
+        indexes = zeros(1,n); % position index
         for i = 1 : n
-            r = 1 + P(i) / 50;
-            plotcircle(r, x(i), y(i), order(i),c(i));
+            indexes(i) = length(angles) * i / n; %Array of index in circle
         end
         
-        P = M * P;
+        xPos = x(indexes);  % x position value for a web site
+        yPos = y(indexes);  % y position value for a web site
+        r = P * 2 / n; % radius of the web site circle (according to population)
+        
+        for i = 1:n
+            for j = i:n
+                line(ax1, [xPos(i) xPos(j)], [yPos(i) yPos(j)],'color','c','LineWidth',1) % Red line from (0,9) to (10,9)
+            end
+        end
+        
+        % Plot for each web site its circle
+        for j = 1:n
+            plotcircle(ax1, r(j),xPos(j),yPos(j),order(j),c(j, :)); % plot the circle
+        end
+        
+        P = M * P; % change the value of P
         
         frame = getframe(gcf);
         writeVideo(animationWriter, frame);
+        
     end
     close(animationWriter);
-%{    
-%display web user distribution
-%# some graph in 2D
-[adj,XY] = bucky;
-N = 30;
-adj = adj(1:N,1:N);
-XY = XY(1:N,1:2);
-
-%# plot edges
-[xx yy] = gplot(adj, XY);
-hFig = figure(); axis equal
-line(xx, yy, 'LineStyle','-', 'Color','b', 'Marker','s', 'MarkerFaceColor','g')
-
-%# draw text near vertices
-xoff = 0; yoff = 0;     %# optional offsets
-str = strtrim(cellstr(num2str((1:N)')));
-hTxt = text(XY(:,1)+xoff, XY(:,2)+yoff, str, ...
-    'FontSize',12, 'FontWeight','bold', ...
-    'HorizontalAlign','right', 'VerticalAlign','bottom');
-
-%# draw circles around text
-e = cell2mat(get(hTxt, {'Extent'}));
-p = e(:,1:2) + e(:,3:4)./2;
-hLine = line('XData',p(:,1), 'YData',p(:,2), ...
-    'LineStyle','none', 'Marker','o', 'MarkerSize',18, ...
-    'MarkerFaceColor','none', 'MarkerEdgeColor','k');
-
-%# link circles position to text (on zoom and figure resize)
-callbackFcn = @(o,e) set(hLine, ...
-    'XData',cellfun(@(x)x(1)+x(3)/2,get(hTxt,{'Extent'})), ...
-    'YData',cellfun(@(x)x(2)+x(4)/2,get(hTxt,{'Extent'})) );
-set(zoom(hFig), 'ActionPostCallback',callbackFcn)
-set(hFig, 'ResizeFcn',callbackFcn)
-
-%}
-
+    
 end
 
-function plotcircle(r,x,y,name,c)
+
+
+
+%% Function plotcircle
+% draw a circle given by x et y its center and r its radius
+% r : radius
+% x : x position of the center of the circle
+% y : y position of the center of the circle
+% name : name associated
+% c : color of the circle (decimal number)
+function plotcircle(ax1, r,x,y,name,c)
     th = 0:pi/100:2*pi;
-    f = r * exp(j*th) + x+j*y;
-    hold on;
-    patch(real(f), imag(f), c);
-    text(x, y, name, 'HorizontalAlignment', 'center');
+    f = r * exp(1i*th) + x+1i*y;
+    %hold on;
+    patch(ax1, real(f), imag(f), c);
+    text(ax1, x, y, name, 'HorizontalAlignment', 'center');
 end
