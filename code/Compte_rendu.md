@@ -8,6 +8,11 @@
 
 # Méthodes et technologies utilisées
 ## Matrice Google
+L'algorithme PageRank permet de classer des sites web selon leur popularité. La popularité d'un site web A est estimée en fonction du nombre de page web B,C,D qui pointe, qui fait référence à cette page web A.
+
+Supposons que l'on ait 4 pages web qui pointent les unes vers les autres de la manière suivante.
+[insérer une image pour modéliser]
+
 Vitesse de converge : 0.85
 On parle de la matrice Google, comment ça fonctionne : 
 comment on l'obtient.
@@ -71,4 +76,7 @@ On pense que ce projet aurait pu être utile pour une entreprise notament dans l
 
 # Bibliographie
 source : https://www.google.com/search/howsearchworks/algorithms/ <br>
-source : https://towardsdatascience.com/pagerank-algorithm-fully-explained-dc794184b4af
+
+source : "PageRank algorithm, fully explained", toward data science, Amrani Amine, 20 décembre 2020. Disponible sur : https://towardsdatascience.com/pagerank-algorithm-fully-explained-dc794184b4af
+
+source : Cours de Data Science par Monsieur XXX, septembre 2021.
