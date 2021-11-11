@@ -43,6 +43,7 @@ display_user_distribution(TotalFrame, order, P, n, M, ax1, ax2);
 
 %% Si on fait une recherche d'un mot %% 
 % fonction display des résultats
+% hdata : c'est le mot qui a ete cherche dans Gloogloo
 function h = request(hdata, StablePR, path, order, n, h, TotalFrame, P, M, ax1, ax2)
     result = sort_page_search(hdata, StablePR, path, order, n); % on ordonne par pertinence les pages
     

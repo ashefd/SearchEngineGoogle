@@ -1,3 +1,0 @@
-function displayResults(result)
-    
-end

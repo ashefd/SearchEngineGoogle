@@ -2,6 +2,7 @@
 
 function word = display_search_engine()
     clf;
+    
     %{
     t = annotation('textbox');
     sz = t.FontSize;
