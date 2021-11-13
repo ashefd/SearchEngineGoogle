@@ -24,20 +24,42 @@ Le web peut être assimilé à une chaîne de Markov où chaque point représent
 
 Supposons que l'on ait 6 pages web qui pointent les unes vers les autres de la manière suivante.
 [insérer une image pour modéliser]
-
-Vitesse de converge : 0.85
-On parle de la matrice Google, comment ça fonctionne :
-comment on l'obtient.
+![title](../images/exemple.png)
+Dans notre cas, on retrouve la matrice de transition suivante :
+![title](../images/L.png)
+Cependant, la somme des éléments de la première colonne vaut 0 car l'élément A ne fait référence à aucun autre état. 
+Le problème est que l'algorithme ne pourra pas converger. 
+Pour pallier ce problème, une notion de téléportation est introduite. On suppose ainsi que tous les noeuds qui ne font référence à aucun état font maintenant référence à tous les états. On obtient ainsi la matrice S suivante :
+![title](../images/S.png)
+Enfin, on remarque qu'il y a deux sous-graphes qui se dressent.
+Le graphe [A,C,E] et [B,D].
+On ne peut pas passer du graphe [A,C,E] à [B,D] et inversement. Google a donc mis en place une formule : 
+M = alpha * S + (1 - alpha)/N * S 
+avec alpha qui est un damping factor = 0.85
+On a ainsi la matrice google M suivante : 
+![title](../images/M.png)
 
 
 ## Choix de la modélisation
+Pour le projet, nous avons mis en place une matrice Google ainsi qu'une interface graphique. 
 Mise en place du page rank stable
 Prise en compte de la popularité, de la proba de passer d'une page à une autre
 ### Les pages web
-Comment on les a écrites
-Où se trouve les pages web
-Ce qu'il a dedans : "pointeurvers : nomPageWeb.txt" + texte
-Ils ont une structure particulière avec titre et contenu particulier dans lequel il peut y avoir des pointeurs.
+Afin d'avoir un support pour notre modélisation, nous avons créé des pages web sous forme de fichiers txt.
+Les pages web sont actuellement : stackoverflow, reddit, youtube, marmiton, amazon, wikipedia.
+Tous ces fichiers txt sont regroupés dans le dossier "pages".
+
+La mise en forme des pages web est la suivante : 
+Le titre doit être sous la forme : [nom_de_la_page_web_sans_espace] + ".txt".
+Dans chaque fichier, on trouve un titre pour la page, du texte et des pointeurs vers d'autres fichiers qui sont sous la forme : "pointeurvers : [nomPageWeb].txt". 
+
+Dans notre modélisation, les pages web pointent entre elles de la manière suivante :
+[Photo]
+
+
+
+Il possible d'ajouter d'autres site web en respectant la mise en forme de la modélisation des pages web.
+
 
 ### Code
 #### Function count_Nb_Pages
