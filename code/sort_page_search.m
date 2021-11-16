@@ -28,8 +28,9 @@ function result = sort_page_search(word, StablePR, path, order, n) % Peut etre q
         thisfile = files(i).name;
         text = fileread(strcat(path, thisfile));
         
-        % Obtenir la liste des mots word dans le texte 
-        matches = regexp(text,word,'match');
+        % Obtenir la liste des mots word dans le texte
+        word = "\<" + word + "\>";
+        matches = regexpi(text,word);
         taille = size(matches);
         
         if(taille ~= 0)

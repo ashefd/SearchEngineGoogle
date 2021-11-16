@@ -17,6 +17,7 @@ alpha = 0.85;
 % Pour l'instant, on a décidé de faire quelque chose d'aléatoire
 P = randi([1 100],n,1,'double');
 
+
 % Page Rank
 StablePR = find_rank(n, path, M); % donne l'ordre de pertinence de chaque page
 %% Display search page %%
@@ -29,7 +30,7 @@ h.Position = [00 -40 1220 1080];
 
 h.HTMLSource = fullfile(pwd,'../google/displayDataFromMATLAB.html');
 
-TotalFrame = 50;
+TotalFrame = 30;
 p1 = uipanel(fig,'Position',[1220 530 500 500]);
 ax1 = uiaxes(p1,'Position',[10 10 450 450]);
 ax1.XLim = [-20 250];
@@ -52,7 +53,14 @@ function h = request(hdata, StablePR, path, order, n, h, TotalFrame, P, M, ax1, 
         % Want to change P into something else
         % Make all the population distributed to those web site and then
         % visualize how the distribution is evoluting
+        total = sum(P);
+        P = zeros(n,1);
         
+        for i = 1:size(result, 2)
+            index = find(order==result(i));
+            P(index) = total/size(result,2);
+        end
     end
+    
     display_user_distribution(TotalFrame, order, P, n, M, ax1, ax2);
 end

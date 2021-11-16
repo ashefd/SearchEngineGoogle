@@ -13,7 +13,7 @@
 
     
     function firstPageAppear(){
-        el('#logoGoogle').style= "position:fixed; width:auto; height:auto; top:5%; left:10%; clear:left; ";
+        el('#logoGoogle').style= "position:fixed; width:50%; height:auto; top:35%; left:18%; clear:left; ";
         el('#searchBar').style = "position: fixed; width: 30%; top: 60%; left:25%;";
         el('#searchBar').value = "";
         el('#searchBtn').style = "position: fixed; top: 60%; left:59%;";
@@ -59,7 +59,7 @@
                 var dom = document.getElementById("Content");
                 dom.textContent = "";
                 for(let i = 0; i < changedData.length; i++){
-                    dom.textContent += changedData[i] + "   " ;
+                    dom.textContent += changedData[i] + " " ;
                      
                 }
                 
@@ -80,7 +80,7 @@
    
    
     <div id="searchElements">
-        <img id="logoGoogle" src="google.jpg" alt="logo Google" style="position:fixed; width:auto; height:auto; top:5%; left:10%; clear:left; ">
+        <img id="logoGoogle" src="google.jpg" alt="logo Google" style="position:fixed; width:50%; height:auto; top:35%; left:18%; clear:left; ">
         <input id="searchBar" type="text" placeholder="Search.." style="position: fixed; width: 30%; top: 60%; left:25%;">
         <button id="searchBtn" style="position: fixed; top: 60%; left:59%;" >Search</button>
     </div>
