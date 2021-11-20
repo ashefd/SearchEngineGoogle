@@ -114,11 +114,11 @@ On considère notre matrice Google M et un vecteur P(t), correspondant à la ré
 $$P(t + \Delta t) = M \cdot P(t)$$
 On obtient donc à la période suivante :
 $$
-P(t + 2 \Delta t) = M^2 \cdot P(t)\\
-...\\
-$$
+P(t + 2 \Delta t) = M² \cdot P(t)\\$$
+
 Comme la matrice M est indépendante du temps, c'est-à-dire homogène, on en déduit la formule suivante :
 $$P(x) = M^x P(0)$$
+avec $x$ le pas de temps
 
 Donc, après plusieurs pas de temps, on a une probabilité de $(M^{x})_{ij}$, pour passer de l'état j à i en x pas de temps.
 
@@ -128,12 +128,18 @@ Pour déterminer cet état d'équilibre, il faudrait calculer :
 $$P(\infty) = M^\infty P(0)$$
 
 Si on attend suffisament longtemps, l'état final i ne dépend plus de l'état initial j.<br>
-Donc $(M^{x})_{ij}$ ne dépend plus de j.
+Donc $(M^{\infty})_{ij}$ ne dépend plus de j. On peut noté $(M^{\infty})_{ij}$ par $\vec \pi$ = $(\pi_1,\pi_2,...)$
 $$
-P(\infty) = M^\infty\cdot P(0) \\
-          = \vec \pi \\
-          \iff M \cdot P(\infty) = P(\infty)
+\begin{aligned}
+P(\infty) &= M^\infty\cdot P(0) \\
+          &= \vec \pi \cdot \vec {(\sum_{i}{P_i(0)})}\\
+          &= \vec \pi \cdot 1 \\
+          &= \vec \pi \\
+\iff P(\infty) &= M \cdot P(\infty)\\
+               &= \vec \pi
+\end{aligned}
 $$
+Donc, on a : $M \cdot \vec \pi = \vec \pi$
 
 Donc on sait que $\vec\pi$ est vecteur propre de M de valeur propre 1.
 
