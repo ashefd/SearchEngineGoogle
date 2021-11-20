@@ -27,18 +27,18 @@ StablePR = find_rank(n, path, M); % donne l'ordre de pertinence de chaque page
 dt = 1;
 r = zeros(1,n);
 for i = 1:n
-    r(i) = dt / StablePR(i)
+    r[i] = dt / 
 end
-R = eye(n) * r'
+R = dot(eye(n),r)
 M_inf = [StablePR StablePR StablePR StablePR StablePR StablePR]
 Z = (M_inf - M + eye(6))^-1
-D = (diag(Z) * ones(1, 6) - Z + eye(n))
+D = dot(R,dot(diag(Z),ones(1, 6)) - Z + eye(n))
 
-[V,A] = eig(D);
-disp("V");
-disp(V);
-disp("A");
-disp(diag(A)); 
+    [V,A] = eig(D);
+    disp("V");
+    disp(V);
+    disp("A");
+    disp(diag(A)); 
     
     
 
