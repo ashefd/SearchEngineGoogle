@@ -1,6 +1,6 @@
 % Rapport du projet Search Engine Machine
 % CABRERA Cyril - LOK Tshanon
-% Polytech Paris-Saclay - ET5 Info 2021-2022
+% Polytech Paris-Saclay - ET5 INFO 2021-2022
 
 # Table des matières
 ... A faire ...
@@ -34,7 +34,8 @@ $$
 \begin{matrix}
 A & B & C & D & E & F
 \end{matrix}
-\\
+$$
+$$
 L =
 \begin{pmatrix}
 0 & 0 & \frac{1}{2}& 0 & 0 & \frac{1}{2}\\
@@ -57,7 +58,8 @@ $$
 \begin{matrix}
 A & B & C & D & E & F
 \end{matrix}
-\\
+$$
+$$
 S = \begin{pmatrix}
 \frac{1}{6} & 0 & \frac{1}{2}& 0 & 0 & \frac{1}{2}\\
 \frac{1}{6} & 0 & 0   & 1 & 0 & 0\\
@@ -81,10 +83,11 @@ avec alpha qui est un "damping factor" :
 $$\alpha = 0.85$$
 On obtient ainsi la matrice Google M suivante :
 $$
-\space \space \begin{matrix}\space \space
-A \space \space \space \space \space \space \space \space \space \space \space \space & B\space \space \space \space \space \space \space \space \space \space  & C\space \space \space \space  \space \space \space \space  & D\space \space \space \space \space \space \space \space  & E\space \space \space  & \space \space \space \space \space \space F
+\begin{matrix}
+\qquad A \qquad & B \qquad & C \qquad & D \qquad & E \qquad & \qquad F
 \end{matrix}
-\\
+$$
+$$
 M = \begin{pmatrix}
 0.116667 & -0.025 & 0.4 & -0.025 & -0.025 & 0.4\\
 0.116667 & -0.025 & -0.025   & 0.825 & -0.025 & -0.025\\
@@ -224,14 +227,14 @@ Il possible d'ajouter d'autres site web en respectant la mise en forme de la mod
 ### Fonctionnalités
 Pour créer notre moteur de recherche, nous avons créé plusieurs fonctions dont les fonctionnalités seront présentées dans ce document.
 
-#### Function count_Nb_Pages
+### Function count_Nb_Pages
 La fonction count_Nb_Pages prend en paramètre :
 
 - un string correspondant au chemin du dossier contenant nos pages web.
 
 Cette fonction permet de compter le nombre de pages web contenu dans ce dossier. La fonction retourne un nombre que l'on nomme n par la suite.
 
-#### Function init_markov_chain
+### Function init_markov_chain
 La fonction init_markov_chain prend en paramètre :
 
 - n, le nombre de pages web
@@ -319,7 +322,7 @@ M =
 \end{matrix}
 $$
 
-#### Function find_rank
+### Function find_rank
 La fonction find_rank prend en paramètre :
 
 - n, le nombre de pages web
@@ -376,7 +379,7 @@ StablePR =
 \end{matrix}
 $$
 
-#### Function sort_page_search
+### Function sort_page_search
 La fonction sort_page_search permet de chercher un mot parmi les différentes pages web et de retourner la liste des pages web contenant ce mot.
 
 La fonction prend en paramètre :
@@ -394,7 +397,7 @@ La fonction renvoie :
 
 ### L'interface graphique
 
-#### Création du vecteur P
+### Création du vecteur P
 Nous avons donc créé un vecteur P qui correspond à une distribution aléatoire de population qui se trouve déjà sur les differents sites web. Chaque nombre se réfère au vecteur order qui permet de connaitre le nombre dans chaque site précisément.
 
 $$
@@ -420,7 +423,7 @@ Par exemple, on  23,3% de la population se trouve initialement sur amazon.
 
 Note : la somme des éléments du vecteur P vaut 1.
 
-#### Moteur de recherche en html
+### Moteur de recherche en html
 Afin de modéliser le moteur de recherche Google, une page html a été créée pour ressembler le plus possible à l'original. En effet, une barre de recherche permet d'obtenir la liste des sites qui contiennent le mot recherché.
 
 Lorsqu'on lance notre moteur de recherche, une modélisation de l'évolution de la distribution de la population sur les différents sites web au cours du temps est faite. On peut ainsi voir sur quels sites vont les personnes.
@@ -437,7 +440,12 @@ Dans la première fenêtre, la taille des cercles correspond à la quantité de 
 
 Dans la seconde fenêtre, on voit l'évolution de la population sur les sites en fonction du temps.
 
-#### Obtention du mot cherché et retour des pages pertinentes
+On calcule la répartition de population de la manière suivante :
+$$
+P(t + \Delta t) = M \cdot P(t)
+$$
+
+### Obtention du mot cherché et retour des pages pertinentes
 
 
  Cependant, deux graphes ont été ajoutés sur la droite de la fenêtre.
