@@ -118,13 +118,13 @@ On considère notre matrice Google M et un vecteur P(t), correspondant à la ré
 $$P(t + \Delta t) = M \cdot P(t)$$
 On obtient donc à la période suivante :
 $$
-P(t + 2 \Delta t) = M² \cdot P(t)\\
-...\\
-$$
-Comme la matrice M est indépendante du temps, c'est-à-dire homogène, on en déduit la formule suivante :
-$$P(x) = M^x P(0)$$
+P(t + 2 \Delta t) = M² \cdot P(t)\\$$
 
-Donc, après plusieurs pas de temps, on a une proba de $(M^{x})_{ij}$, pour passer de l'état j à i en x pas de temps.
+Comme la matrice M est indépendante du temps, c'est-à-dire homogène, on en déduit la formule suivante :
+$$P(x) = M^x P(0)$$ 
+avec $x$ le pas de temps
+
+Donc, après plusieurs pas de temps, on a une proba de $(M^{x})_{ij}$, pour passer de l'état j à i en $x$ pas de temps.
 
 On remarque qu'à partir d'un certain t, la répartition de la population ne varie plus beaucoup : c'est notre état d'équilibre.
 
@@ -132,14 +132,20 @@ Pour déterminer cet état d'équilibre, il faudrait calculer :
 $$P(\infty) = M^\infty P(0)$$
 
 Si on attend suffisament longtemps, l'état final i ne dépend plus de l'état initial j.
-Donc $(M^{x})_{ij}$ ne dépend plus de j.
+Donc $(M^{x})_{ij}$ ne dépend plus de j. On peut noté $(M^{x})_{ij}$ par $\vec \pi$ = $(\pi_1,\pi_2,...)$
 $$
-P(\infty) = M^\infty\cdot P(0) \\
-          = \vec \pi \\
-          \iff M \cdot P(\infty) = P(\infty)
+\begin{aligned}
+P(\infty) &= M^\infty\cdot P(0) \\
+          &= \vec \pi \cdot \vec {(\sum_{i}{P_i(0)})}\\
+          &= \vec \pi \cdot 1 \\
+          &= \vec \pi \\
+\iff P(\infty) &= M \cdot P(\infty)\\
+               &= \vec \pi
+\end{aligned}
 $$
+Donc, on a : $M \cdot \vec \pi = \vec \pi$
 
-Donc on sait que pi est vecteur propre de M de valeur propre 1.
+On en déduit que $\vec\pi$ est vecteur propre de M de valeur propre 1.
 
 Ainsi, pour déterminer le rang des différentes pages web, il faut obligatoirement détermniner le vecteur propre associé à la valeur propre 1.
 
