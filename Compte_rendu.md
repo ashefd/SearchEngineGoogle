@@ -25,7 +25,7 @@ Le web peut être assimilé à une chaîne de Markov où chaque point représent
 Supposons que l'on ait 6 pages web qui pointent les unes vers les autres de la manière suivante.
 
 
-![Exemple de chaîne de Markov](images/exemple.png)
+![Exemple de chaîne de Markov](images/exemple.png){ width=250px }
 
 Dans notre cas, on retrouve la matrice de transition suivante :
 $$
@@ -431,11 +431,11 @@ Pour notre modélisation, et pour la suite, le nombre total de personnes ne chan
 
 Les deux représentations graphiques sont corrélées et les couleurs sont cohérentes entre les deux fenêtres.
 
-![Graphe du vecteur population sous formes de chaîne](images/graphes_cercles.png)
+![Graphe du vecteur population sous formes de chaîne](images/graphes_cercles.png){ width=250px } \ ![Graphe du vecteur population en fonction du temps](images/graphes.png){ width=250px }
 
 Dans la première fenêtre, on observe un graphe représentant les liens entre les différentes pages. La taille des cercles correspond à la quantité de personnes qui visitent le site en question.
 
-![Graphe du vecteur population en fonction du temps](images/graphes.png)
+
 
 Dans la seconde fenêtre, on voit l'évolution de la population sur les sites en fonction du temps.
 
@@ -548,6 +548,8 @@ Il y a certains points que nous aurions aimé améliorer sur ce projet pour alle
 - Améliorer l'affichage des résultats pour se rapprocher d'un vrai moteur de recherche en montrant notamment le contenu de la page.
 
 Nous pensons que ce projet aurait pu être utile pour une entreprise. Par exemple pour créer un système interne permettant de faire des liens entre des documents contenus dans des archives et de faire des recherches pour retrouver ceux qui nous intéressent en établissant une hiérarchie d'utilité dans les résultats.
+
+$\pagebreak$
 
 # Bibliographie
 source : https://www.google.com/search/howsearchworks/algorithms/
