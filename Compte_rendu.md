@@ -553,4 +553,10 @@ source : "PageRank algorithm, fully explained", toward data science, Amrani Amin
 
 source : Cours de Data Science par Monsieur Desesquelles, délivré septembre 2021.
 
-source : matlab
+source : "Create HTML file that can trigger or respond to Data changes" MatLab Documentation. Disponible ici : https://fr.mathworks.com/help/matlab/creating_guis/create-an-html-file-that-sets-data-or-responds-to-data-changes-from-matlab.html
+
+source : "Create HTML file that can trigger or respond to Data changes" MatLab Documentation. Disponible ici : https://fr.mathworks.com/help/matlab/creating_guis/create-an-html-file-that-sets-data-or-responds-to-data-changes-from-matlab.html
+
+source : "uihtml" MatLab Documentation. Disponible ici : https://fr.mathworks.com/help/matlab/ref/uihtml.html
+
+source : "How to create a filled circle?". MatLLab Answers. Disponible ici: https://fr.mathworks.com/matlabcentral/answers/437523-how-to-create-a-filled-circle
