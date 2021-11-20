@@ -1,8 +1,0 @@
-title: How code - Stack Overflow
-
-content: 
-Hello ! I am trying to code something. PLS HELP
-I want to create a matrix out of an image of Juan.
-can somebody help me ???
-
-pointeurvers: youtube.txt 
