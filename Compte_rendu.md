@@ -195,7 +195,7 @@ Par rapport à notre choix de modélisation, on peut voir que les sites les plus
 Il possible d'ajouter d'autres site web en respectant la mise en forme de la modélisation des pages web.
 
 
-### Code
+### Fonctionnalités
 Pour créer notre moteur de recherche, nous avons créé plusieurs fonctions dont les fonctionnalités seront présentées dans ce document.
 
 #### Function count_Nb_Pages
@@ -358,12 +358,10 @@ La fonction renvoie :
 - result, un vecteur contenant la liste des pages web contenant le mot cherché et est triée de manière décroissante en fonction du page rank des pages web.
 
 
-#### L'interface graphique
+### L'interface graphique
 
-Nous souhaitons pouvoir visualiser l'évolution de la population sur les différents sites web au cours du temps.
-##### Création du vecteur P
+#### Création du vecteur P
 Nous avons donc créé un vecteur P qui correspond à une distribution aléatoire de population qui se trouve déjà sur les differents sites web. Chaque nombre se réfère au vecteur order qui permet de connaitre le nombre dans chaque site précisément.
-L'interface graphique a été inspiré par celui du moteur de recherche Google. Cependant, deux graphes ont été ajoutés sur la droite de la fenêtre.
 
 $$
 P =
@@ -384,12 +382,27 @@ P =
     youtube\\
 \end{matrix}
 $$
-La somme de chaque élément du vecteur P vaut 1.
+Par exemple, on  23,3% de la population se trouve initialement sur amazon.
 
+Note : la somme des éléments du vecteur P vaut 1.
+
+#### Moteur de recherche en html
+Afin de modéliser le moteur de recherche Google, une page html a été créée pour ressembler le plus possible à l'original. En effet, une barre de recherche permet d'obtenir la liste des sites qui contiennent le mot recherché. 
+
+Lorsqu'on lance notre moteur de recherche, une modélisation de l'évolution de la distribution de la population sur les différents sites web au cours du temps est faite. On peut ainsi voir sur quel site vont les personnes.
+
+Pour notre modélisation, et pour la suite, le nombre de personnes total ne change pas et est fixé par le paramètre pop_tot.
+
+![title](../graphes.png)
 
 \+ Dire que les couleurs sont cohérentes entre elles
 
+
 #### Obtention du mot cherché et retour des pages pertinentes
+
+
+ Cependant, deux graphes ont été ajoutés sur la droite de la fenêtre.
+
 - Retour depuis la page html
 - Calcul fait
 - Envoie des données vers la page html
