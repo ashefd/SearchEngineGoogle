@@ -490,12 +490,12 @@ Peu importe le $P(0)$, la distribution de la population sur les sites web revien
 **Combien de temps met-on pour diviser par 2 la distance à l'état de stabilité ?**
 
 On peut le calculer de la manière suivante :
-$ T_{1/2} = - \frac{\Delta t \times ln(2)}{ln(| \lambda_2 |)}$ avec $\lambda_2$ la deuxième plus grande valeur propre de $D$ après $\lambda_1 = 1$.
+$T_{1/2} = - \frac{\Delta t \times ln(2)}{ln(| \lambda_2 |)}$ avec $\lambda_2$ la deuxième plus grande valeur propre de $D$ après $\lambda_1 = 1$.
 
-$ D = D_{\vec r} [Z^{diag} \vec 1 - Z \cdot I]$ avec $Z = (M^{\infty} - M + I)^{-1}$, $r$ tel que $r_i = \Delta t / \pi_i$ 
+$D = D_{\vec r} [Z^{diag} \vec 1 - Z \cdot I]$ avec $Z = (M^{\infty} - M + I)^{-1}$, $r$ tel que $r_i = \Delta t / \pi_i$
 On prend la deuxième plus grande (en valeur absolu) valeur propre.
 
-Dans notre modèle, 
+Dans notre modèle,
 $T_{1/2} = 4.6778$ minutes et $T_{1/10} = 15.5392$ minutes en supposant que $\Delta t = 20$ minutes.
 
 
@@ -545,8 +545,6 @@ Il y a certains points que nous aurions aimé améliorer sur ce projet pour alle
 - Améliorer l'affichage des résultats pour se rapprocher d'un vrai moteur de recherche en montrant notamment le contenu de la page.
 
 Nous pensons que ce projet aurait pu être utile pour une entreprise. Par exemple pour créer un système interne permettant de faire des liens entre des documents contenus dans des archives et de faire des recherches pour retrouver ceux qui nous intéressent en établissant une hiérarchie d'utilité dans les résultats.
-
-$\pagebreak$
 
 # Bibliographie
 source : https://www.google.com/search/howsearchworks/algorithms/
