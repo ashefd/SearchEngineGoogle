@@ -25,7 +25,7 @@ Le web peut être assimilé à une chaîne de Markov où chaque point représent
 Supposons que l'on ait 6 pages web qui pointent les unes vers les autres de la manière suivante.
 
 
-![Exemple de chaîne de Markov](images/exemple.png)
+![Exemple de chaîne de Markov](images/exemple.png){ width=250px }
 
 Dans notre cas, on retrouve la matrice de transition suivante :
 $$
@@ -431,11 +431,11 @@ Pour notre modélisation, et pour la suite, le nombre total de personnes ne chan
 
 Les deux représentations graphiques sont corrélées et les couleurs sont cohérentes entre les deux fenêtres.
 
-![Graphe du vecteur population sous formes de chaîne](images/graphes_cercles.png)
+![Graphe du vecteur population sous formes de chaîne](images/graphes_cercles.png){ width=250px } \ ![Graphe du vecteur population en fonction du temps](images/graphes.png){ width=250px }
 
 Dans la première fenêtre, on observe un graphe représentant les liens entre les différentes pages. La taille des cercles correspond à la quantité de personnes qui visitent le site en question.
 
-![Graphe du vecteur population en fonction du temps](images/graphes.png)
+
 
 Dans la seconde fenêtre, on voit l'évolution de la population sur les sites en fonction du temps.
 
@@ -490,12 +490,12 @@ Peu importe le $P(0)$, la distribution de la population sur les sites web revien
 **Combien de temps met-on pour diviser par 2 la distance à l'état de stabilité ?**
 
 On peut le calculer de la manière suivante :
-$ T_{1/2} = - \frac{\Delta t \times ln(2)}{ln(| \lambda_2 |)}$ avec $\lambda_2$ la deuxième plus grande valeur propre de $D$ après $\lambda_1 = 1$.
+$T_{1/2} = - \frac{\Delta t \times ln(2)}{ln(| \lambda_2 |)}$ avec $\lambda_2$ la deuxième plus grande valeur propre de $D$ après $\lambda_1 = 1$.
 
-$ D = D_{\vec r} [Z^{diag} \vec 1 - Z \cdot I]$ avec $Z = (M^{\infty} - M + I)^{-1}$, $r$ tel que $r_i = \Delta t / \pi_i$ 
+$D = D_{\vec r} [Z^{diag} \vec 1 - Z \cdot I]$ avec $Z = (M^{\infty} - M + I)^{-1}$, $r$ tel que $r_i = \Delta t / \pi_i$
 On prend la deuxième plus grande (en valeur absolu) valeur propre.
 
-Dans notre modèle, 
+Dans notre modèle,
 $T_{1/2} = 4.6778$ minutes et $T_{1/10} = 15.5392$ minutes en supposant que $\Delta t = 20$ minutes.
 
 
