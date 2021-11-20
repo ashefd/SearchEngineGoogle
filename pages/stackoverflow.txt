@@ -1,0 +1,9 @@
+title: How do pointer-to-pointer's work in C? (and when might you use them?) - Stack Overflow
+
+content: 
+How do pointers-to-pointers work in C?
+When might you use them?
+
+
+You can read the Wikipedia page about it (pointeurvers: wikipedia.txt)
+ 
