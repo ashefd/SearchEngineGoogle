@@ -160,11 +160,36 @@ $$E(A - \lambda I)  \iff (A - \lambda I)\cdot v = 0$$
 
 On calcule donc les vecteurs propres de M :
 
+$$
+\begin{matrix}
+0.75528512 & 0.70000128 & -0.09852262 & -0.25754839+0.47535414i & -0.25754839-0.47535414i &-0.85
+\end{matrix}
+$$
 
+$$
+\begin{matrix}
+-3.82640508\times 10^{-1} & 5.57969940\times 10^{-1} & -9.04030650\times 10^{-1} & -3.97035708\times 10^{-1}-0.07732039i & -3.97035708\times 10^{-1}+0.07732039i & -9.15181426\times 10^{-18} \\
+5.72319646\times 10^{-1} & -3.81754853\times 10^{-1} & 1.35021942\times 10^{-1} & 3.93007272\times 10^{-2}+0.02675777i & 3.93007272\times 10^{-2}-0.02675777i & -7.07106781\times 10^{-1} \\
+-3.07601626\times 10^{-1} & 4.37093602\times 10^{-1} & 2.38101306\times 10^{-1} & 6.83723701\times 10^{-1} & 6.83723701\times 10^{-1} & -9.81970491\times 10^{-17} \\
+5.72319646\times 10^{-1} & -3.81754853\times 10^{-1} & 1.35021942\times 10^{-1} & 3.93007272\times 10^{-2}+0.02675777i & 3.93007272\times 10^{-2}-0.02675777i & 7.07106781\times 10^{-1} \\
+-2.09552640\times 10^{-1} & 2.92592167\times 10^{-1} & 1.23074120\times 10^{-1} & -1.40994194\times 10^{-1}+0.39525253i & -1.40994194\times 10^{-1}-0.39525253i & 1.37578635\times 10^{-16} \\
+-2.44858362\times 10^{-1} & 3.47181536\times 10^{-1} & 2.72813604\times 10^{-1} & -2.24294652\times 10^{-1}-0.37144722i & -2.24294652\times 10^{-1}+0.37144722i & 4.21772479\times 10^{-17} \\
+\end{matrix}
+$$
 
-On trouve dans notre cas, on trouve que le vecteur propre associé à
+On prend la valeur propre la plus proche de 1 en valeur absolue. Dans notre exemple, il s'agit du vecteur propre associé à -0.85 à savoir :
+$$
+\begin{matrix}
+−9.15181426 \times 10^{−18}\\
+−7.07106781 \times 10^{−1}\\
+−9.81970491 \times 10^{−17}\\
+7.07106781 \times 10^{−1}\\
+1.37578635 \times 10^{−16}\\
+4.21772479 \times 10^{−17}\\
+\end{matrix}
+$$
 
-On constate alors que l'état de nos sites ne bougent pas. Ainsi, c'est pour cela que l'on déduit que le vecteur propre associé à la valeur propre 1 correspond au rang de chacun des sites web.
+Après un certain temps, la distribution se stabilise et les valeurs sont similaires à celles du vecteur propre associé à la valeur 1.
 
 ## Choix de la modélisation
 ### Les pages web
