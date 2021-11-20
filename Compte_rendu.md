@@ -44,14 +44,13 @@ L =
 0 & 0 & 0   & 0 & 0 & \frac{1}{2}\\
 0 & 0 & \frac{1}{2} & 0 & 0 & 0\\
 \end{pmatrix}
-
 \begin{matrix}
 A \\ B \\ C \\ D \\ E \\ F
 \end{matrix}
 $$
 
 Comme on peut le constater, la somme des éléments de la première colonne vaut 0 car l'élément A ne fait référence à aucun autre état.
-Le problème est que l'algorithme ne pourra pas converger.
+Le problème est que l'algorithme ne pourra pas converger.<br>
 Pour pallier ce problème, une notion de téléportation est introduite. On suppose ainsi que tous les noeuds qui ne font référence à aucun état font maintenant référence à tous les états. On obtient ainsi la matrice S suivante :
 $$
 \space \space
@@ -82,12 +81,10 @@ avec alpha qui est un "damping factor" :
 $$\alpha = 0.85$$
 On obtient ainsi la matrice Google M suivante :
 $$
-
 \space \space \begin{matrix}\space \space
 A \space \space \space \space \space \space \space \space \space \space \space \space & B\space \space \space \space \space \space \space \space \space \space  & C\space \space \space \space  \space \space \space \space  & D\space \space \space \space \space \space \space \space  & E\space \space \space  & \space \space \space \space \space \space F
 \end{matrix}
 \\
-
 M = \begin{pmatrix}
 0.116667 & -0.025 & 0.4 & -0.025 & -0.025 & 0.4\\
 0.116667 & -0.025 & -0.025   & 0.825 & -0.025 & -0.025\\
@@ -96,7 +93,6 @@ M = \begin{pmatrix}
 0.116667 & -0.025 & -0.025   & -0.025 & -0.025 & 0.4 \\
 0.116667 & -0.025 & 0.4 & -0.025 & -0.025 & -0.025\\
 \end{pmatrix}
-
 \begin{matrix}
 A \\ B \\ C \\ D \\ E \\ F
 \end{matrix}
@@ -118,20 +114,20 @@ On considère notre matrice Google M et un vecteur P(t), correspondant à la ré
 $$P(t + \Delta t) = M \cdot P(t)$$
 On obtient donc à la période suivante :
 $$
-P(t + 2 \Delta t) = M² \cdot P(t)\\
+P(t + 2 \Delta t) = M^2 \cdot P(t)\\
 ...\\
 $$
 Comme la matrice M est indépendante du temps, c'est-à-dire homogène, on en déduit la formule suivante :
 $$P(x) = M^x P(0)$$
 
-Donc, après plusieurs pas de temps, on a une proba de $(M^{x})_{ij}$, pour passer de l'état j à i en x pas de temps.
+Donc, après plusieurs pas de temps, on a une probabilité de $(M^{x})_{ij}$, pour passer de l'état j à i en x pas de temps.
 
-On remarque qu'à partir d'un certain t, la répartition de la population ne varie plus beaucoup : c'est notre état d'équilibre.
+On remarque qu'à partir d'un certain temps t, la répartition de la population ne varie plus beaucoup : c'est notre **état d'équilibre**.
 
 Pour déterminer cet état d'équilibre, il faudrait calculer :
 $$P(\infty) = M^\infty P(0)$$
 
-Si on attend suffisament longtemps, l'état final i ne dépend plus de l'état initial j.
+Si on attend suffisament longtemps, l'état final i ne dépend plus de l'état initial j.<br>
 Donc $(M^{x})_{ij}$ ne dépend plus de j.
 $$
 P(\infty) = M^\infty\cdot P(0) \\
@@ -139,13 +135,10 @@ P(\infty) = M^\infty\cdot P(0) \\
           \iff M \cdot P(\infty) = P(\infty)
 $$
 
-Donc on sait que pi est vecteur propre de M de valeur propre 1.
+Donc on sait que $\vec\pi$ est vecteur propre de M de valeur propre 1.
 
-Ainsi, pour déterminer le rang des différentes pages web, il faut obligatoirement détermniner le vecteur propre associé à la valeur propre 1.
+Ainsi, pour déterminer le rang des différentes pages web, il faut obligatoirement déterminer le vecteur propre associé à la valeur propre 1, c'est-à-dire trouver $v$ tel que :
 
-il faut déterminer les vecteurs propres ainsi que les valeurs propres.
-
-Si on a une valeur propre 1, on a
 $$
 \begin{aligned}
 M \cdot v &= \lambda v\\
@@ -153,24 +146,24 @@ M \cdot v &= \lambda v\\
 \end{aligned}
 $$
 
-
-On constate alors que l'état de nos sites ne bougent pas. Ainsi, c'est pour cela que l'on déduit que le vecteur propre associé à la valeur propre 1 correspond au rang de chacun des sites web.
-
-vecteur propre et valeur propre déterminés par E(M-lambda I)
-Par définition,
+Les vecteurs propres et les valeurs propres peuvent être déterminés par $E(M-\lambda I)$.<br>
+Le noyau d'une matrice A est défini par :
 $$Ker(A) = \left\{v \in R^n | \forall u \in A, u \cdot v = 0 \right\}$$
-De plus, on sait que $Ker(A) = E(A- \lambda I)$ et que :
-$$E(A- \lambda I)  \iff A- \lambda I = 0$$
-En calculant, on sait que les vecteurs propres de M sont :
+On sait également que $Ker(A) = E(A- \lambda I)$ et que :
+$$E(A - \lambda I)  \iff A - \lambda I = 0$$
+
+On calcule donc les vecteurs propres de M :
+
 
 
 On trouve dans notre cas, on trouve que le vecteur propre associé à
 
+On constate alors que l'état de nos sites ne bougent pas. Ainsi, c'est pour cela que l'on déduit que le vecteur propre associé à la valeur propre 1 correspond au rang de chacun des sites web.
 
 ## Choix de la modélisation
 Pour le projet, nous avons mis en place une matrice Google ainsi qu'une interface graphique.
 Mise en place du page rank stable
-Prise en compte de la popularité, de la proba de passer d'une page à une autre
+Prise en compte de la popularité, de la probabilité de passer d'une page à une autre
 ### Les pages web
 Afin d'avoir un support pour notre modélisation, nous avons créé des pages web sous forme de fichiers txt.
 Les pages web sont actuellement : stackoverflow, reddit, youtube, marmiton, amazon, wikipedia.
@@ -265,7 +258,8 @@ $$
     wikipedia&
     youtube\qquad \quad&
 \end{matrix}
-\\
+$$
+$$
 M =
 \begin{pmatrix}
     0.1667 \qquad & 0.4500 \qquad & 0.4500\qquad  & 0.0250\qquad  & 0.0250 \qquad & 0.0250\\
