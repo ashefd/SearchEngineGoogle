@@ -18,12 +18,12 @@ alpha = 0.85;
 P = randi([1 100],n,1,'double');
 pop_tot = sum(P);
 P = P/sum(P);
-disp(P);
+%disp(P);
 
 % Page Rank
 StablePR = find_rank(n, path, M); % donne l'ordre de pertinence de chaque page
 %% Display search page %%
-
+%{
 fig = uifigure;
 fig.Position = [00 -10 1920 1080];
 
@@ -42,7 +42,7 @@ ax2 = uiaxes(p2,'Position',[10 15 450 450]);
 
 h.DataChangedFcn = @(src,event)request(h.Data, StablePR, path, order, n, h, TotalFrame, P, M, ax1, ax2, pop_tot);
 display_user_distribution(TotalFrame, order, P, n, M, ax1, ax2, pop_tot);
-
+%}
 
 %% Si on fait une recherche d'un mot %% 
 % fonction display des résultats

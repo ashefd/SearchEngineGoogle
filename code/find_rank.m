@@ -2,6 +2,10 @@
 function StablePR = find_rank(n, path, M)
     StablePR = zeros(n,1);
     [V,D] = eig(M);
+    disp("V");
+    disp(V);
+    disp(D);
+    disp("D");
     highest = 0;
     Ihighest = 1;
     for i = 1:n
