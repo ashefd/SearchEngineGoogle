@@ -51,7 +51,7 @@ $$
 
 Comme on peut le constater, la somme des éléments de la première colonne vaut 0 car l'élément A ne fait référence à aucun autre état.
 Le problème est que l'algorithme ne pourra pas converger.<br>
-Pour pallier ce problème, une notion de téléportation est introduite. On suppose ainsi que tous les noeuds qui ne font référence à aucun état font maintenant référence à tous les états. On obtient ainsi la matrice S suivante :
+Pour pallier ce problème, on suppose ainsi que tous les noeuds qui ne font référence à aucun état font maintenant référence à tous les états. On obtient ainsi la matrice S suivante :
 $$
 \space \space
 \begin{matrix}
@@ -156,7 +156,7 @@ Les vecteurs propres et les valeurs propres peuvent être déterminés par $E(M-
 Le noyau d'une matrice A est défini par :
 $$Ker(A) = \left\{v \in R^n | \forall u \in A, u \cdot v = 0 \right\}$$
 On sait également que $Ker(A) = E(A- \lambda I)$ et que :
-$$E(A - \lambda I)  \iff A - \lambda I = 0$$
+$$E(A - \lambda I)  \iff (A - \lambda I)\cdot v = 0$$
 
 On calcule donc les vecteurs propres de M :
 
@@ -167,9 +167,6 @@ On trouve dans notre cas, on trouve que le vecteur propre associé à
 On constate alors que l'état de nos sites ne bougent pas. Ainsi, c'est pour cela que l'on déduit que le vecteur propre associé à la valeur propre 1 correspond au rang de chacun des sites web.
 
 ## Choix de la modélisation
-Pour le projet, nous avons mis en place une matrice Google ainsi qu'une interface graphique.
-Mise en place du page rank stable
-Prise en compte de la popularité, de la probabilité de passer d'une page à une autre
 ### Les pages web
 Afin d'avoir un support pour notre modélisation, nous avons créé des pages web sous forme de fichiers txt.
 Les pages web sont actuellement : stackoverflow, reddit, youtube, marmiton, amazon, wikipedia.
@@ -178,27 +175,22 @@ Tous ces fichiers txt sont regroupés dans le dossier "pages".
 La mise en forme des pages web est la suivante :
 Le titre doit être sous la forme :
 
-\\[nom_de_la_page_web_sans_espace] + ".txt".\\
+\\[nom_de_la_page_web_sans_espace] + ".txt". <br>
+exemple : reddit.txt
 
-Dans chaque fichier, on trouve un titre pour la page, du texte et des pointeurs vers d'autres fichiers qui sont sous la forme : \\"pointeurvers : [nomPageWeb].txt".\\
+Dans chaque fichier, on trouve un titre pour la page, du texte et des pointeurs vers d'autres fichiers qui sont sous la forme : <br> "pointeurvers : [nomPageWeb].txt".
 
 Dans notre modélisation, les pages web pointent entre elles de la manière suivante :
-[Photo]
-
+![title](images/markov.jpg)
 
 Par rapport à notre choix de modélisation, on peut voir que les sites les plus populaires sont :
 
 1. stackoverflow
-2. wikipedia
+2. wikipedia (ex aequo avec 1)
 3. marmiton
 4. amazon
-5. youtube
+5. youtube 
 6. reddit
-
-
-
-
-
 
 Il possible d'ajouter d'autres site web en respectant la mise en forme de la modélisation des pages web.
 
@@ -212,12 +204,21 @@ La fonction count_Nb_Pages prend en paramètre :
 Cette fonction permet de compter le nombre de pages web contenu dans ce dossier. La fonction retourne un nombre que l'on nomme n par la suite.
 
 #### Function init_markov_chain
-La fonction init_markov_chain prend en paramètre le nombre de pages web, le chemin des pages web et un paramètre alpha que l'on a fixé à 0.85.
+La fonction init_markov_chain prend en paramètre : 
+- n, le nombre de pages web
+- path, le chemin des pages web
+- alpha, le damping factor que l'on a fixé à 0.85.
 
-Cette fonction permet d'initialiser la matrice M, correspondant à notre matrice google, ainsi que le vecteur order. Le vecteur order permet de garder en mémoire l'ordre de lecture des différents sites web dans notre matrice M.
+Cette fonction permet d'initialiser et de retourner :
+- M, une matrice correspondant à notre matrice google, 
+- order, un vecteur contenant la liste des sites. 
+
+Le vecteur order permet de garder en mémoire l'ordre de lecture des différents sites web dans notre matrice M.
+
 Explications:
 La matrice M est une matrice de transition. On passe d'un état A à un état B via les références de chaque page. Pour être sûr de l'ordre des états dans la matrice M, on met en place un vecteur order qui permet de garder en mémoire l'ordre.
 
+Dans notre modèle, le vecteur order a été fixé comme cela:
 $$
 order =
 \begin{pmatrix}
@@ -230,7 +231,9 @@ order =
 \end{pmatrix}
 $$
 
+Le calcul de M a été réalisé de la manière que celle décrite dans la partie "Matrice Google" de ce document. Voici les étapes de calculs :
 
+On commence par créer une matrice de transition L. 
 $$
 L =
 \begin{pmatrix}
@@ -242,7 +245,7 @@ L =
       0 & 0.5000 & 0.5000 &      0 &      0 &      0\\
 \end{pmatrix}
 $$
-
+La somme des colonnes ne valent pas toutes 1. On fait donc pointer les états associés à tous les états. On obtient la matrice S suivante :
 $$
 S =
 \begin{pmatrix}
@@ -255,6 +258,7 @@ S =
 \end{pmatrix}
 $$
 
+Enfin, pour éviter tout problème de sous-graphe, on applique la formule $ M = \alpha S + \frac{1 - \alpha}{N}  S  $ ce qui nous donne M.
 $$
 \begin{matrix}
     amazon \quad&
@@ -285,13 +289,40 @@ M =
 \end{matrix}
 $$
 
-
-
-
 #### Function find_rank
-La fonction find_rank prend en paramètre le n, le nombre de pages web, path, le chemin des pages et la matrice M, la matrice Google.
+La fonction find_rank prend en paramètre :
+- n, le nombre de pages web
+- path, le chemin des pages
+- M, la matrice Google.
 
-Cette fonction permet de déterminer le rang de chaque page web. Pour cela, il nous suffit de trouver le vecteur propre de la matrice Google M avec une valeur propre associée de 1.
+Cette fonction permet d'initialiser et de retourner :
+- StablePR, un vecteur contenant le score de chaque page web
+
+Pour ce faire, il nous suffit de trouver le vecteur propre de la matrice Google M avec une valeur propre associée de 1.
+
+En MatLab, la fonction eig permet de retourner les valeurs propres et vecteurs propres d'une matrice.
+$$
+X = 
+\begin{pmatrix}
+    0.2659 & -0.3205 & -0.0000 & -0.0000 &  0.4676 & -0.0000\\
+    0.3178 & -0.4136 &  0.7071 & -0.7071 & -0.7399 &  0.0000\\
+    0.0918 & -0.0591 & -0.7071 &  0.7071 & -0.1057 &  0.0000\\
+    0.6120 &  0.5568 &  0.0000 &  0.0000 & -0.0449 &  0.7071\\
+    0.6120 &  0.5568 &  0.0000 &  0.0000 & -0.0449 & -0.7071\\
+    0.2659 & -0.3205 &  0.0000 &  0.0000 &  0.4676 & -0.0000\\
+\end{pmatrix}
+$$
+$$
+\begin{pmatrix}
+    1.0000 &      0 &      0 &       0 &       0 &       0\\
+         0 & 0.7685 &      0 &       0 &       0 &       0\\
+         0 &      0 & 0.0000 &       0 &       0 &       0\\
+         0 &      0 &      0 & -0.0000 &       0 &       0\\
+         0 &      0 &      0 &       0 & -0.6268 &       0\\
+         0 &      0 &      0 &       0 &       0 & -0.8500\\
+\end{pmatrix}
+$$
+Comme expliqué dans la partie "Page Rank" de ce document, on en déduit StablePR en prenant le vecteur propre dont la valeur propre vaut 1, c'est à dire la première colonne de X.
 
 $$
 StablePR =
@@ -313,11 +344,8 @@ StablePR =
 \end{matrix}
 $$
 
-
-**Expliciter le lien avec la partie expliquant la matrice Google.**
-
 #### Function sort_page_search
-La fonction sort_page_search permet de chercher un mot parmi les différentes pages web et de retourner la liste des pages web contenant ce mot. La liste des pages web est triée de manière décroissante en fonction du page rank des pages web.
+La fonction sort_page_search permet de chercher un mot parmi les différentes pages web et de retourner la liste des pages web contenant ce mot. 
 
 La fonction prend en paramètre :
 - hdata : le mot que l'on cherhce
@@ -326,12 +354,14 @@ La fonction prend en paramètre :
 - order : un vecteur de string contenant l'ordre de lecture des pages
 - n : le nombre de pages web
 
+La fonction renvoie :
+- result, un vecteur contenant la liste des pages web contenant le mot cherché et est triée de manière décroissante en fonction du page rank des pages web.
+
+
 #### L'interface graphique
 
 Nous souhaitons pouvoir visualiser l'évolution de la population sur les différents sites web au cours du temps.
 ##### Création du vecteur P
-
-
 Nous avons donc créé un vecteur P qui correspond à une distribution aléatoire de population qui se trouve déjà sur les differents sites web. Chaque nombre se réfère au vecteur order qui permet de connaitre le nombre dans chaque site précisément.
 L'interface graphique a été inspiré par celui du moteur de recherche Google. Cependant, deux graphes ont été ajoutés sur la droite de la fenêtre.
 
