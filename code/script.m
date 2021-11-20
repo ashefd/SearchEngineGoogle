@@ -23,24 +23,45 @@ P = P/sum(P);
 % Page Rank
 StablePR = find_rank(n, path, M); % donne l'ordre de pertinence de chaque page
 
-%% Temps de retour
-dt = 1;
+%% Temps pour diviser par x la distance à 
+dt = 20; % en minute
 r = zeros(1,n);
 for i = 1:n
-    r(i) = dt / StablePR(i)
+    r(i) = dt / StablePR(i);
 end
-R = eye(n) * r'
-M_inf = [StablePR StablePR StablePR StablePR StablePR StablePR]
-Z = (M_inf - M + eye(6))^-1
-D = (diag(Z) * ones(1, 6) - Z + eye(n))
+R = diag(r);
+M_inf = zeros(n);
+for i = 1:n
+    for j = 1:n
+        M_inf(j,i) =StablePR(j);
+    end
+end
+Z = (M_inf - M + eye(n))^-1;
+X = ((diag(Z)*ones(1,n)) - Z + eye(n) );
+D = R*X;
 
 [V,A] = eig(D);
-disp("V");
-disp(V);
-disp("A");
-disp(diag(A)); 
-    
-    
+element = diag(A/max(max(A)));
+
+disp(element);
+lambda1 = 1;
+lambda2 = 0;
+count = 0;
+for i = 1:n
+    if lambda2 < element(i)
+        if element(i)==1 && count == 0
+            count = count + 1
+        elseif element(i)==1 && count > 0
+            lambda2 = abs(element(i));
+        elseif abs(element(i))>lambda2 && element(i) ~=1
+            lambda2 = abs(element(i));
+        end
+    end
+end
+
+
+T2 = - dt * log(2) / log(lambda2)       % Temps pour diviser par deux la distance à l'equilibre 
+T10 = - dt * log(10) / log(lambda2)     % Temps pour diviser par dix la distance à l'equilibre 
 
 %% Display search page %%
 %{

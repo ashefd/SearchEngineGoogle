@@ -477,22 +477,20 @@ $$ pop\_tot * P(t + \Delta t)$$
 
 On remarque que peu importe le $P(0)$, la distribution de la population sur les sites web revient à son état de stabilité.
 
-**ATTENTION : PARLER DE LA DOCUmentATION**
+# Temps pour diviser par x la distance à l'équilibre
+Peu importe le $P(0)$, la distribution de la population sur les sites web revient à son état de stabilité.
 
-# Temps de retour vers l'état de stabilité
-peu importe le $P(0)$, la distribution de la population sur les sites web revient à son état de stabilité.
+**Combien de temps met-on pour diviser par 2 la distance à l'état de stabilité ?**
 
-**Combien de temps met-on pour revenir à l'état de stabilité ?**
+On peut le calculer de la manière suivante :
+$ T_{1/2} = - \frac{\Delta t \times ln(2)}{ln(| \lambda_2 |)}$ avec $\lambda_2$ la deuxième plus grande valeur propre de $D$ après $\lambda_1 = 1$.
 
-On peut le calculer de la manière suivante : <br>
+
+ $ D = D_{\vec r} [Z^{diag} \vec 1 - Z \cdot I]$ avec $Z = (M^{\infty} - M + I)^{-1}$, $r$ tel que $r_i = \Delta t / \pi_i$ 
 On prend la deuxième plus grande (en valeur absolu) valeur propre.
-Calcul
 
-Chez nous :
-
-
-
-Et si on modifiait $\alpha$ ?
+Dans notre modèle, 
+$T_{1/2} = 4.6778$ minutes et $T_{1/10} = 15.5392$ minutes en supposant que $\Delta t = 20$ minutes.
 
 
 # Répartition du travail
