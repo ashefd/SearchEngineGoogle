@@ -128,7 +128,7 @@ Pour déterminer cet état d'équilibre, il faudrait calculer :
 $$P(\infty) = M^\infty P(0)$$
 
 Si on attend suffisament longtemps, l'état final i ne dépend plus de l'état initial j.<br>
-Donc $(M^{\infty})_{ij}$ ne dépend plus de j. On peut noté $(M^{\infty})_{ij}$ par $\vec \pi$ = $(\pi_1,\pi_2,...)$
+Donc $(M^{\infty})_{ij}$ ne dépend plus de j. On peut noté $(M^{\infty})_{ij}$ par ($\vec \pi, \vec \pi, ...$) avec $\vec \pi$ = $(\pi_1,\pi_2,...)$
 $$
 \begin{aligned}
 P(\infty) &= M^\infty\cdot P(0) \\
