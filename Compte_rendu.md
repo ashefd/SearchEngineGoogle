@@ -23,12 +23,18 @@ Considérons par exemple un ensemble de sites web A, B, C, D, E et F qui pointen
 
 Le web peut être assimilé à une chaîne de Markov où chaque point représente une page web et chaque transition représente le lien de référence entre ces pages. Donc si A pointe vers B, alors A fait référence à B sur sa page web. À ces transitions sont associées des probabilités qui sont la répartition équilibrée de la probabilité d'aller vers une page référencée.
 
+**Mise en situation :**
 Supposons que l'on ait 6 pages web qui pointent les unes vers les autres de la manière suivante.
 <br>
 ![title](images/exemple.png)
 <br><br>
 Dans notre cas, on retrouve la matrice de transition suivante :
 $$
+\space \space
+\begin{matrix}
+A & B & C & D & E & F
+\end{matrix}
+\\
 L =
 \begin{pmatrix}
 0 & 0 & \frac{1}{2}& 0 & 0 & \frac{1}{2}\\
@@ -38,12 +44,21 @@ L =
 0 & 0 & 0   & 0 & 0 & \frac{1}{2}\\
 0 & 0 & \frac{1}{2} & 0 & 0 & 0\\
 \end{pmatrix}
+
+\begin{matrix}
+A \\ B \\ C \\ D \\ E \\ F
+\end{matrix}
 $$
 
 Comme on peut le constater, la somme des éléments de la première colonne vaut 0 car l'élément A ne fait référence à aucun autre état.
 Le problème est que l'algorithme ne pourra pas converger.
 Pour pallier ce problème, une notion de téléportation est introduite. On suppose ainsi que tous les noeuds qui ne font référence à aucun état font maintenant référence à tous les états. On obtient ainsi la matrice S suivante :
 $$
+\space \space
+\begin{matrix}
+A & B & C & D & E & F
+\end{matrix}
+\\
 S = \begin{pmatrix}
 \frac{1}{6} & 0 & \frac{1}{2}& 0 & 0 & \frac{1}{2}\\
 \frac{1}{6} & 0 & 0   & 1 & 0 & 0\\
@@ -52,6 +67,9 @@ S = \begin{pmatrix}
 \frac{1}{6} & 0 & 0   & 0 & 0 & \frac{1}{2}\\
 \frac{1}{6} & 0 & \frac{1}{2} & 0 & 0 & 0\\
 \end{pmatrix}
+\begin{matrix}
+A \\ B \\ C \\ D \\ E \\ F
+\end{matrix}
 $$
 
 Enfin, on remarque qu'il y a deux sous-graphes qui se dressent.
@@ -64,6 +82,12 @@ avec alpha qui est un "damping factor" :
 $$\alpha = 0.85$$
 On obtient ainsi la matrice Google M suivante :
 $$
+
+\space \space \begin{matrix}\space \space
+A \space \space \space \space \space \space \space \space \space \space \space \space & B\space \space \space \space \space \space \space \space \space \space  & C\space \space \space \space  \space \space \space \space  & D\space \space \space \space \space \space \space \space  & E\space \space \space  & \space \space \space \space \space \space F
+\end{matrix}
+\\
+
 M = \begin{pmatrix}
 0.116667 & -0.025 & 0.4 & -0.025 & -0.025 & 0.4\\
 0.116667 & -0.025 & -0.025   & 0.825 & -0.025 & -0.025\\
@@ -72,6 +96,10 @@ M = \begin{pmatrix}
 0.116667 & -0.025 & -0.025   & -0.025 & -0.025 & 0.4 \\
 0.116667 & -0.025 & 0.4 & -0.025 & -0.025 & -0.025\\
 \end{pmatrix}
+
+\begin{matrix}
+A \\ B \\ C \\ D \\ E \\ F
+\end{matrix}
 $$
 On se retrouve enfin avec une unique chaine de Markov régulière : pas d'état absorbant et pas de chaine secondaire.<br>
 Tous les états sont donc réguliers, c'est-à-dire que ils peuvent tous être quittés ou rejoints.
@@ -229,15 +257,32 @@ S =
 $$
 
 $$
+\begin{matrix}
+    amazon \quad&
+    marmiton \quad&
+    reddit &
+    stackoverflow&
+    wikipedia&
+    youtube\qquad \quad&
+\end{matrix}
+\\
 M =
 \begin{pmatrix}
-    0.1667 & 0.4500 & 0.4500 & 0.0250 & 0.0250 & 0.0250\\
-    0.1667 & 0.0250 & 0.0250 & 0.0250 & 0.0250 & 0.8750\\
-    0.1667 & 0.0250 & 0.0250 & 0.0250 & 0.0250 & 0.0250\\
-    0.1667 & 0.0250 & 0.0250 & 0.0250 & 0.8750 & 0.0250\\
-    0.1667 & 0.0250 & 0.0250 & 0.8750 & 0.0250 & 0.0250\\
-    0.1667 & 0.4500 & 0.4500 & 0.0250 & 0.0250 & 0.0250\\
+    0.1667 \qquad & 0.4500 \qquad & 0.4500\qquad  & 0.0250\qquad  & 0.0250 \qquad & 0.0250\\
+    0.1667 \qquad & 0.0250 \qquad & 0.0250\qquad  & 0.0250\qquad  & 0.0250 \qquad & 0.8750\\
+    0.1667 \qquad & 0.0250 \qquad & 0.0250\qquad  & 0.0250\qquad  & 0.0250 \qquad & 0.0250\\
+    0.1667 \qquad & 0.0250 \qquad & 0.0250\qquad  & 0.0250\qquad  & 0.8750 \qquad & 0.0250\\
+    0.1667 \qquad & 0.0250 \qquad & 0.0250\qquad  & 0.8750\qquad  & 0.0250 \qquad & 0.0250\\
+    0.1667 \qquad & 0.4500 \qquad & 0.4500\qquad  & 0.0250\qquad  & 0.0250 \qquad & 0.0250\\
 \end{pmatrix}
+\begin{matrix}
+    amazon\\
+    marmiton\\
+    reddit\\
+    stackoverflow\\
+    wikipedia\\
+    youtube\\
+\end{matrix}
 $$
 
 
@@ -258,6 +303,14 @@ StablePR =
     0.6120\\
     0.2659\\
 \end{pmatrix}
+\begin{matrix}
+    amazon\\
+    marmiton\\
+    reddit\\
+    stackoverflow\\
+    wikipedia\\
+    youtube\\
+\end{matrix}
 $$
 
 
@@ -292,6 +345,14 @@ P =
     0.1818\\
     0.0284\\
 \end{pmatrix}
+\begin{matrix}
+    amazon\\
+    marmiton\\
+    reddit\\
+    stackoverflow\\
+    wikipedia\\
+    youtube\\
+\end{matrix}
 $$
 La somme de chaque élément du vecteur P vaut 1.
 
@@ -305,7 +366,7 @@ La somme de chaque élément du vecteur P vaut 1.
 
 - Vecteur P changé
 $$
-P = amazon youtube reddit
+P =
 \begin{pmatrix}
     0.3333\\
          0\\
@@ -314,11 +375,30 @@ P = amazon youtube reddit
          0\\
     0.3333\\
 \end{pmatrix}
+\begin{matrix}
+    amazon\\
+    marmiton\\
+    reddit\\
+    stackoverflow\\
+    wikipedia\\
+    youtube\\
+\end{matrix}
 $$
 
 - Modélisation dans l'interface graphique modifié pour correspondre à la situation nouvelle.
 
 ATTENTION : PARLER DE LA DOCUmentATION
+
+# Après plusieurs recherches
+Combien de temps on met pour revenir à l'état de stabilité ?
+
+On peut le calculer de la manière suivante :
+On prend la deuxième plus grande (en valeur absolu) valeur propre.
+Calcul
+
+Chez nous : ...
+
+Et si on modifiait $\alpha$ ?
 
 
 # Répartition du travail
