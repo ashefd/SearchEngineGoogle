@@ -2,8 +2,7 @@
 % CABRERA Cyril - LOK Tshanon
 % Polytech Paris-Saclay - ET5 INFO 2021-2022
 
-# Table des matières
-... A faire ...
+$$\pagebreak$$
 
 # Introduction
 Google est une entreprise américaine créée en 1998 par Larry Page et Sergey Brin. Sa fondation repose sur le fameux "Google Search". Ce moteur de recherche est le site le plus visité au monde et le plus utilisé, gérant 3.5 milliards de requêtes par jour. Cela représente 92% de part de marché en 2021.
@@ -15,7 +14,7 @@ Dans ce projet de Data Science, nous avons décidé de recréer les caractérist
 # Méthodes et technologies utilisées
 ## Matrice Google et "PageRank"
 ### Matrice Google
-L'algorithme "PageRank" a été développé par Google afin de classer un certains nombres de sites web en fonction de leur popularité.<br>
+L'algorithme "PageRank" a été développé par Google afin de classer un certains nombres de sites web en fonction de leur popularité.$\\$
 La popularité d'une page web est définie par le nombre de références qui y sont faites sur tous les autres sites repertoriés.
 
 Considérons par exemple un ensemble de sites web A, B, C, D, E et F qui pointent les uns vers les autres. Si A est référencé sur tous les autres sites, alors il aura une plus grande popularité que les autres. Lors d'une recherche, A sera classé plus haut que B, C, D, E et F dans les résultats.
@@ -26,7 +25,7 @@ Le web peut être assimilé à une chaîne de Markov où chaque point représent
 Supposons que l'on ait 6 pages web qui pointent les unes vers les autres de la manière suivante.
 
 
-![title](images/exemple.png)
+![Exemple de chaîne de Markov](images/exemple.png)
 
 Dans notre cas, on retrouve la matrice de transition suivante :
 $$
@@ -51,7 +50,7 @@ A \\ B \\ C \\ D \\ E \\ F
 $$
 
 Comme on peut le constater, la somme des éléments de la première colonne vaut 0 car l'élément A ne fait référence à aucun autre état.
-Le problème est que l'algorithme ne pourra pas converger.<br>
+Le problème est que l'algorithme ne pourra pas converger.$\\$
 Pour pallier ce problème, on suppose ainsi que tous les noeuds qui ne font référence à aucun état font maintenant référence à tous les états. On obtient ainsi la matrice S suivante :
 $$
 \space \space
@@ -74,7 +73,7 @@ A \\ B \\ C \\ D \\ E \\ F
 $$
 
 Enfin, on remarque qu'il y a deux sous-graphes qui se dressent.
-Le graphe [A,C,E,F] et [B,D].<br>
+Le graphe [A,C,E,F] et [B,D].$\\$
 On ne peut pas passer du graphe [A,C,E,F] à [B,D] et inversement. Google a donc mis en place une formule :
 
 $$ M = \alpha S + \frac{1 - \alpha}{N}  S  $$
@@ -100,14 +99,14 @@ M = \begin{pmatrix}
 A \\ B \\ C \\ D \\ E \\ F
 \end{matrix}
 $$
-On se retrouve enfin avec une unique chaine de Markov régulière : pas d'état absorbant et pas de chaine secondaire.<br>
+On se retrouve enfin avec une unique chaine de Markov régulière : pas d'état absorbant et pas de chaine secondaire.$\\$
 Tous les états sont donc réguliers, c'est-à-dire que ils peuvent tous être quittés ou rejoints.
 
 ### Page Rank
-Nous avons maintenant en place la matrice M correspondant à la matrice Google.<br>
+Nous avons maintenant en place la matrice M correspondant à la matrice Google.$\\$
 Il est possible, à partir de cette matrice de déterminer le rang de chaque page web.
 
-**Qu'est ce qu'un rang ?**<br> Le rang correspond à la popularité d'un site web en fonction des autres.
+**Qu'est ce qu'un rang ?**$\\$ Le rang correspond à la popularité d'un site web en fonction des autres.
 
 **Explications :**
 
@@ -130,7 +129,7 @@ On remarque qu'à partir d'un certain temps t, la répartition de la population 
 Pour déterminer cet état d'équilibre, il faudrait calculer :
 $$P(\infty) = M^\infty P(0)$$
 
-Si on attend suffisament longtemps, l'état final i ne dépend plus de l'état initial j.<br>
+Si on attend suffisament longtemps, l'état final i ne dépend plus de l'état initial j.$\\$
 Donc $(M^{\infty})_{ij}$ ne dépend plus de j. On peut noter $(M^{\infty})_{ij}$ par $(\vec\pi,\vec\pi,...)$ avec $\vec \pi = (\pi_1,\pi_2,...)$.
 $$
 \begin{aligned}
@@ -155,7 +154,7 @@ M \cdot v &= \lambda v\\
 \end{aligned}
 $$
 
-Les vecteurs propres et les valeurs propres peuvent être déterminés par $E(M-\lambda I)$.<br>
+Les vecteurs propres et les valeurs propres peuvent être déterminés par $E(M-\lambda I)$.$\\$
 Le noyau d'une matrice A est défini par :
 $$Ker(A) = \left\{v \in R^n | \forall u \in A, u \cdot v = 0 \right\}$$
 On sait également que $Ker(A) = E(A- \lambda I)$ et que :
@@ -203,14 +202,14 @@ Tous ces fichiers txt sont regroupés dans le dossier "pages".
 La mise en forme des pages web est la suivante :
 Le titre doit être sous la forme :
 
-\\[nom_de_la_page_web_sans_espace] + ".txt". <br>
+[nom_de_la_page_web_sans_espace] + ".txt". $\\$
 exemple : reddit.txt
 
-Dans chaque fichier, on trouve un titre pour la page, du texte et des pointeurs vers d'autres fichiers qui sont sous la forme : <br> "pointeurvers : [nomPageWeb].txt".
+Dans chaque fichier, on trouve un titre pour la page, du texte et des pointeurs vers d'autres fichiers qui sont sous la forme : $\\$ "pointeurvers :" + [nomPageWeb] + ".txt".
 
 Dans notre modélisation, les pages web pointent entre elles de la manière suivante :
 
-![title](images/markov.jpg)
+![Chaîne de Markov utilisée dans ce projet](images/markov.jpg)
 
 Par rapport à notre choix de modélisation, on peut voir que les sites les plus populaires sont :
 
@@ -432,11 +431,11 @@ Pour notre modélisation, et pour la suite, le nombre total de personnes ne chan
 
 Les deux représentations graphiques sont corrélées et les couleurs sont cohérentes entre les deux fenêtres.
 
-![title](images/graphes_cercles.png)
+![Graphe du vecteur population sous formes de chaîne](images/graphes_cercles.png)
 
-Dans la première fenêtre, la taille des cercles correspond à la quantité de personnes qui visitent le site en question.
+Dans la première fenêtre, on observe un graphe représentant les liens entre les différentes pages. La taille des cercles correspond à la quantité de personnes qui visitent le site en question.
 
-![title](images/graphes.png)
+![Graphe du vecteur population en fonction du temps](images/graphes.png)
 
 Dans la seconde fenêtre, on voit l'évolution de la population sur les sites en fonction du temps.
 
@@ -492,7 +491,7 @@ peu importe le $P(0)$, la distribution de la population sur les sites web revien
 
 **Combien de temps met-on pour revenir à l'état de stabilité ?**
 
-On peut le calculer de la manière suivante : <br>
+On peut le calculer de la manière suivante : $\\$
 On prend la deuxième plus grande (en valeur absolu) valeur propre.
 Calcul
 
@@ -504,29 +503,51 @@ Et si on modifiait $\alpha$ ?
 
 
 # Répartition du travail
-Une grande partie du projet a été effectuée en même temps par les deux membres du projet. En effet, la mise en place de la modélisation, la création de la matrice google M, les différents vecteurs ont été fait lors des 3 séances de TP de DataScience.
-Par la suite, l'interface graphique ainsi que les phases de recherche-réponse ont été ajoutés après ces trois séances.
+
+Ce projet a été réalisé en grande partie sur les heures dédiées au projet dans l'emploi du temps. Nous avons donc travaillé ensemble sur la majorité du projet.
+
+La mise en place de la modélisation, la création de la matrice Google M, les différents vecteurs ont été faits lors des 3 séances de TP de Data Science.
+
+Par la suite, l'interface graphique ainsi que le système de requêtes pour effectuer des recherches ont été ajoutés après ces trois séances.
+
 En outre, le projet a été réparti de manière équitable.
 
-On s'est bien réparti le travail **chacal**.
-
 # Résultats
-![title](images/1.png)
-![title](images/2.png)
-Commentaires sur les photos. On visualise bien la stabilité de la population dans notre modélisation : tout semble cohérent.
+Le programme est donc bien fonctionnel. Il est possible de faire des recherches sur l'ensemble des sites que nous avons créés.
 
-![title](images/3.png)
-![title](images/4.png)
+Au début du programme, on arrive donc sur la page d'accueil du moteur de recherche. On peut voir l'évolution du classement des pages arriver à l'équilibre.
+
+![Page d'accueil](images/1.png)
+
+On est ensuite invité à entrer un mot-clé pour faire une recherche.
+
+![Entrée de mots-clés](images/2.png)
+
+Lorsque l'on lance la recherche, on peut voir l'état initial du vecteur de population au temps t = 0.
+
+Sur la page principale, on observe les résultats fournis par le moteur de recherche.
+
+![Résultat de recherche à l'état initial P(0)](images/3.png)
+
+Après un certain temps, on peut voir que pour toutes requêtes effectuées, le vecteur population arrive au même état d'équilibre correspondant au classement des pages stable déduit avec la matrice Google.
+
+![Résultat de recherche à l'état d'équilibre](images/4.png)
+
+$$\pagebreak$$
 
 # Conclusion
-Ce que l'on aurait pu ajouter, améliorer.
-Résumé de la partie résultat.
-On aurait pu ajouter la pertinence du site web selon le nombre d'apparition du mot cherché.
-Si on ajoute des sites web, la modélisation de l'évolution de la population devient de moins en moins lisible. On aurait pu améliorer cela.
-On aurait aussi pu améliorer la façon dont les résultats sont affichés : c'est-à-dire le faire comme Google le fait.
-On aurait pu, pour aller plus loin, essayer de faire une application : dans le sens où on aurait pu créer un exécuteur pour ne pas aller sur matlab puis cliquer sur RUN.
-On pense que ce projet aurait pu être utile pour une entreprise notament dans le cas où cette dernière souhaiterait développer un moteur de recherche interne à l'entreprise tout en essayant de faire des liens entre plusieurs sites, documents. Et ainsi voir les documents/sites les plus utiles.
+Nous avons donc créé un moteur de recherche inspiré par Google Search et son système de classification des sites web "Page Rank".
 
+La modélisation que nous avons réalisée a pu nous donner des résultats cohérents lorsque nous effectuions des requêtes dans la barre de recherche. On pouvait suivre en direct l'évolution des mouvements de population entre les différents sites au cours du temps.
+
+Il y a certains points que nous aurions aimé améliorer sur ce projet pour aller plus loin :
+
+- Créer plus de pages webs.
+- Avoir une plus grande flexibilité sur les mots-clés. En cherchant "marmite", on ne trouvera pas les pages contenant le mot "marmites" par exemple.
+- Ajouter une influence sur l'ordre d'apparition des résultats dans la page de recherche de sortes à ce que les sites citant le plus le terme recherché apparaissent plus haut.
+- Améliorer l'affichage des résultats pour se rapprocher d'un vrai moteur de recherche en montrant notamment le contenu de la page.
+
+Nous pensons que ce projet aurait pu être utile pour une entreprise. Par exemple pour créer un système interne permettant de faire des liens entre des documents contenus dans des archives et de faire des recherches pour retrouver ceux qui nous intéressent en établissant une hiérarchie d'utilité dans les résultats.
 
 # Bibliographie
 source : https://www.google.com/search/howsearchworks/algorithms/
