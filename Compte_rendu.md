@@ -29,7 +29,7 @@ Supposons que l'on ait 6 pages web qui pointent les unes vers les autres de la m
 <br><br>
 Dans notre cas, on retrouve la matrice de transition suivante :
 $$
-L = 
+L =
 \begin{pmatrix}
 0 & 0 & \frac{1}{2}& 0 & 0 & \frac{1}{2}\\
 0 & 0 & 0   & 1 & 0 & 0\\
@@ -40,8 +40,8 @@ L =
 \end{pmatrix}
 $$
 
-Comme on peut le constater, la somme des éléments de la première colonne vaut 0 car l'élément A ne fait référence à aucun autre état. 
-Le problème est que l'algorithme ne pourra pas converger. 
+Comme on peut le constater, la somme des éléments de la première colonne vaut 0 car l'élément A ne fait référence à aucun autre état.
+Le problème est que l'algorithme ne pourra pas converger.
 Pour pallier ce problème, une notion de téléportation est introduite. On suppose ainsi que tous les noeuds qui ne font référence à aucun état font maintenant référence à tous les états. On obtient ainsi la matrice S suivante :
 $$
 S = \begin{pmatrix}
@@ -55,93 +55,92 @@ S = \begin{pmatrix}
 $$
 
 Enfin, on remarque qu'il y a deux sous-graphes qui se dressent.
-Le graphe [A,C,E] et [B,D].
-On ne peut pas passer du graphe [A,C,E] à [B,D] et inversement. Google a donc mis en place une formule : 
+Le graphe [A,C,E,F] et [B,D].<br>
+On ne peut pas passer du graphe [A,C,E,F] à [B,D] et inversement. Google a donc mis en place une formule :
 
 $$ M = \alpha S + \frac{1 - \alpha}{N}  S  $$
 
-avec alpha qui est un "damping factor" :  
+avec alpha qui est un "damping factor" :
 $$\alpha = 0.85$$
-On obtient ainsi la matrice Google M suivante : 
+On obtient ainsi la matrice Google M suivante :
 $$
 M = \begin{pmatrix}
 0.116667 & -0.025 & 0.4 & -0.025 & -0.025 & 0.4\\
 0.116667 & -0.025 & -0.025   & 0.825 & -0.025 & -0.025\\
 0.116667 & -0.025 & -0.025  & -0.025 & 0.825 & -0.025\\
-0.116667& 0.825 & -0.025 & -0.025 & -0.025 & -0.025\\
+0.116667 & 0.825 & -0.025 & -0.025 & -0.025 & -0.025\\
 0.116667 & -0.025 & -0.025   & -0.025 & -0.025 & 0.4 \\
 0.116667 & -0.025 & 0.4 & -0.025 & -0.025 & -0.025\\
 \end{pmatrix}
 $$
-On se retrouve efin avec une unique chaine de markov régulière : pas d'état absorbant et pas de 2ème chaine.
+On se retrouve enfin avec une unique chaine de Markov régulière : pas d'état absorbant et pas de chaine secondaire.<br>
 Tous les états sont donc réguliers, c'est-à-dire que ils peuvent tous être quittés ou rejoints.
 
 ### Page Rank
-Nous avons maintenant en place la matrice M correspondant à la matrice Google.
+Nous avons maintenant en place la matrice M correspondant à la matrice Google.<br>
 Il est possible, à partir de cette matrice de déterminer le rang de chaque page web.
 
-Qu'est ce qu'un rang ? Le rang correspond à la popularité d'un site web en fonction des autres. 
+**Qu'est ce qu'un rang ?**<br> Le rang correspond à la popularité d'un site web en fonction des autres.
 
-Explications :
+**Explications :**
 
-Si on prend notre matrice Google M et un vecteur P(t) correspondant à la répartition de la population dans les différents sites web.  
+On considère notre matrice Google M et un vecteur P(t), correspondant à la répartition de la population dans les différents sites web.
 
-Si on est au temps t et que l'on souhaite connaitre la répartition de la population dans les différents sites web après un temps deltaT = 1, il faudrait faire cette opération : 
+À un temps t donné, si on souhaite connaitre la répartition de la population dans les différents sites web après un temps $\Delta t = 1$, il faudrait effectuer cette opération :
 $$P(t + \Delta t) = M \cdot P(t)$$
-et on a que :
-$$P(t + 2 \Delta t) = M² \cdot P(t)\\
-...\\
-
+On obtient donc à la période suivante :
 $$
-Comme la matrice M est indépendante du temps, ie : homogène, on revient à la formule suivante :
-$$P(x) = M^x P(O)$$
+P(t + 2 \Delta t) = M² \cdot P(t)\\
+...\\
+$$
+Comme la matrice M est indépendante du temps, c'est-à-dire homogène, on en déduit la formule suivante :
+$$P(x) = M^x P(0)$$
 
-Donc, après plusieurs pas de temps, on a une proba de (M^x)ij, pour passer de l'état j à i en x pas de temps.
+Donc, après plusieurs pas de temps, on a une proba de $(M^{x})_{ij}$, pour passer de l'état j à i en x pas de temps.
 
 On remarque qu'à partir d'un certain t, la répartition de la population ne varie plus beaucoup : c'est notre état d'équilibre.
 
-Pour déterminer cet état d'équilibre, il faudrait calculer : 
-$$P(\infin) = M^\infin P(0)$$
+Pour déterminer cet état d'équilibre, il faudrait calculer :
+$$P(\infty) = M^\infty P(0)$$
 
 Si on attend suffisament longtemps, l'état final i ne dépend plus de l'état initial j.
-Donc (M^infini)ij ne dépend plus de j.
+Donc $(M^{x})_{ij}$ ne dépend plus de j.
 $$
-P(\infin) = M^\infin \cdot P(0) \\
+P(\infty) = M^\infty\cdot P(0) \\
           = \vec \pi \\
-          \iff M \cdot P(\infin) = P(\infin)
+          \iff M \cdot P(\infty) = P(\infty)
 $$
 
-Donc on sait que pi est vecteur propre de M de valeur propre 1. 
+Donc on sait que pi est vecteur propre de M de valeur propre 1.
 
 Ainsi, pour déterminer le rang des différentes pages web, il faut obligatoirement détermniner le vecteur propre associé à la valeur propre 1.
 
 il faut déterminer les vecteurs propres ainsi que les valeurs propres.
 
-Si on a une valeur propre 1, on a 
+Si on a une valeur propre 1, on a
 $$
-\begin{align*}
-M . v &= \lambda v\\
+\begin{aligned}
+M \cdot v &= \lambda v\\
       &= 1 v\\
-\end{align*}
+\end{aligned}
 $$
 
 
 On constate alors que l'état de nos sites ne bougent pas. Ainsi, c'est pour cela que l'on déduit que le vecteur propre associé à la valeur propre 1 correspond au rang de chacun des sites web.
 
 vecteur propre et valeur propre déterminés par E(M-lambda I)
-Par définition, 
+Par définition,
 $$Ker(A) = \left\{v \in R^n | \forall u \in A, u \cdot v = 0 \right\}$$
-De plus, on sait que $$Ker(A) = E(A- \lambda I)$$ 
-Et que : 
+De plus, on sait que $Ker(A) = E(A- \lambda I)$ et que :
 $$E(A- \lambda I)  \iff A- \lambda I = 0$$
-En calculant, on sait que les vecteurs propres de M sont : 
+En calculant, on sait que les vecteurs propres de M sont :
 
 
-On trouve dans notre cas, on trouve que le vecteur propre associé à 
+On trouve dans notre cas, on trouve que le vecteur propre associé à
 
 
 ## Choix de la modélisation
-Pour le projet, nous avons mis en place une matrice Google ainsi qu'une interface graphique. 
+Pour le projet, nous avons mis en place une matrice Google ainsi qu'une interface graphique.
 Mise en place du page rank stable
 Prise en compte de la popularité, de la proba de passer d'une page à une autre
 ### Les pages web
@@ -149,8 +148,8 @@ Afin d'avoir un support pour notre modélisation, nous avons créé des pages we
 Les pages web sont actuellement : stackoverflow, reddit, youtube, marmiton, amazon, wikipedia.
 Tous ces fichiers txt sont regroupés dans le dossier "pages".
 
-La mise en forme des pages web est la suivante : 
-Le titre doit être sous la forme : 
+La mise en forme des pages web est la suivante :
+Le titre doit être sous la forme :
 
 \\[nom_de_la_page_web_sans_espace] + ".txt".\\
 
@@ -214,10 +213,8 @@ L =
       0 &      0 &      0 &      0 & 1.0000 &      0\\
       0 &      0 &      0 & 1.0000 &      0 &      0\\
       0 & 0.5000 & 0.5000 &      0 &      0 &      0\\
-
 \end{pmatrix}
 $$
-
 
 $$
 S =
@@ -228,12 +225,8 @@ S =
     0.1667 &      0 &      0 &      0 & 1.0000 &      0\\
     0.1667 &      0 &      0 & 1.0000 &      0 &      0\\
     0.1667 & 0.5000 & 0.5000 &      0 &      0 &      0\\
-
 \end{pmatrix}
 $$
-
-
-
 
 $$
 M =
@@ -251,7 +244,7 @@ $$
 
 
 #### Function find_rank
-La fonction find_rank prend en paramètre le n, le nombre de pages web, path, le chemin des pages et la matrice M, la matrice Google. 
+La fonction find_rank prend en paramètre le n, le nombre de pages web, path, le chemin des pages et la matrice M, la matrice Google.
 
 Cette fonction permet de déterminer le rang de chaque page web. Pour cela, il nous suffit de trouver le vecteur propre de la matrice Google M avec une valeur propre associée de 1.
 
@@ -282,12 +275,12 @@ La fonction prend en paramètre :
 
 #### L'interface graphique
 
-Nous souhaitons pouvoir visualiser l'évolution de la population sur les différents sites web au cours du temps. 
+Nous souhaitons pouvoir visualiser l'évolution de la population sur les différents sites web au cours du temps.
 ##### Création du vecteur P
 
 
 Nous avons donc créé un vecteur P qui correspond à une distribution aléatoire de population qui se trouve déjà sur les differents sites web. Chaque nombre se réfère au vecteur order qui permet de connaitre le nombre dans chaque site précisément.
-L'interface graphique a été inspiré par celui du moteur de recherche Google. Cependant, deux graphes ont été ajoutés sur la droite de la fenêtre. 
+L'interface graphique a été inspiré par celui du moteur de recherche Google. Cependant, deux graphes ont été ajoutés sur la droite de la fenêtre.
 
 $$
 P =
@@ -329,9 +322,9 @@ ATTENTION : PARLER DE LA DOCUmentATION
 
 
 # Répartition du travail
-Une grande partie du projet a été effectuée en même temps par les deux membres du projet. En effet, la mise en place de la modélisation, la création de la matrice google M, les différents vecteurs ont été fait lors des 3 séances de TP de DataScience. 
+Une grande partie du projet a été effectuée en même temps par les deux membres du projet. En effet, la mise en place de la modélisation, la création de la matrice google M, les différents vecteurs ont été fait lors des 3 séances de TP de DataScience.
 Par la suite, l'interface graphique ainsi que les phases de recherche-réponse ont été ajoutés après ces trois séances.
-En outre, le projet a été réparti de manière équitable. 
+En outre, le projet a été réparti de manière équitable.
 
 On s'est bien réparti le travail **chacal**.
 
