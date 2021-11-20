@@ -418,7 +418,9 @@ Lorsqu'on lance notre moteur de recherche, une modélisation de l'évolution de 
 
 Pour notre modélisation, et pour la suite, le nombre de personnes total ne change pas et est fixé par le paramètre pop_tot.
 
-![title](../graphes.png)
+![title](images/graphes.png)
+
+La taille des 
 
 \+ Dire que les couleurs sont cohérentes entre elles
 
