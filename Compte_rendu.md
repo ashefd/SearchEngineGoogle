@@ -446,17 +446,19 @@ P(t + \Delta t) = M \cdot P(t)
 $$
 
 ### Obtention du mot cherché et retour des pages pertinentes
+Une fois qu'un mot X a été ajouté dans la barre de recherche et que le bouton "search" a été cliqué, la fonction request va être appelée.
+
+Le mot X va être recherché parmi toutes les pages web à l'aide de la fonction sort_page_search.
+Cette fonction va lister les pages qui contiennent X. Cette liste va ensuite être trié en fonction du page rank (donc en fonction de StablePR) de manière décroissante.
+
+Une fois la liste établie, les résultats sont envoyés vers la page html pour que ces résultats soient affichés.
 
 
- Cependant, deux graphes ont été ajoutés sur la droite de la fenêtre.
+De plus, la modélisation de l'évolution de la répartition de la population en fonction du temps va être relancé avec une distribution P initiale fixée en fonction de la liste des sites contenants le mot X cherché.
 
-- Retour depuis la page html
-- Calcul fait
-- Envoie des données vers la page html
-
-- Vecteur P changé
+Par exemple, si les sites contenant le mot X est : [amazon, reddit, youtube], alors le vecteur P est donné par :
 $$
-P =
+P(0) =
 \begin{pmatrix}
     0.3333\\
          0\\
@@ -475,18 +477,28 @@ P =
 \end{matrix}
 $$
 
-- Modélisation dans l'interface graphique modifié pour correspondre à la situation nouvelle.
+Par la suite, la fonction display_user_distribution va calculer l'évolution de la répartition de la population à l'aide de la formule suivante :
+$$ P(t+ \Delta t) = M * P(t) $$
 
-ATTENTION : PARLER DE LA DOCUmentATION
+Pour obtenir la quantité de personnes dans chaque site, on fait :
+$$ pop\_tot * P(t + \Delta t)$$
 
-# Après plusieurs recherches
-Combien de temps on met pour revenir à l'état de stabilité ?
+On remarque que peu importe le $P(0)$, la distribution de la population sur les sites web revient à son état de stabilité.
 
-On peut le calculer de la manière suivante :
+**ATTENTION : PARLER DE LA DOCUmentATION**
+
+# Temps de retour vers l'état de stabilité
+peu importe le $P(0)$, la distribution de la population sur les sites web revient à son état de stabilité.
+
+**Combien de temps met-on pour revenir à l'état de stabilité ?**
+
+On peut le calculer de la manière suivante : <br>
 On prend la deuxième plus grande (en valeur absolu) valeur propre.
 Calcul
 
-Chez nous : ...
+Chez nous :
+
+
 
 Et si on modifiait $\alpha$ ?
 
