@@ -1,7 +1,6 @@
 % Rapport du projet Search Engine Machine
 % CABRERA Cyril - LOK Tshanon
-% Polytech Paris-Saclay - ET5 Info
-% 2021-2022
+% Polytech Paris-Saclay - ET5 Info 2021-2022
 
 # Table des matières
 ... A faire ...
@@ -25,9 +24,10 @@ Le web peut être assimilé à une chaîne de Markov où chaque point représent
 
 **Mise en situation :**
 Supposons que l'on ait 6 pages web qui pointent les unes vers les autres de la manière suivante.
-<br>
+
+
 ![title](images/exemple.png)
-<br><br>
+
 Dans notre cas, on retrouve la matrice de transition suivante :
 $$
 \space \space
@@ -128,7 +128,7 @@ Pour déterminer cet état d'équilibre, il faudrait calculer :
 $$P(\infty) = M^\infty P(0)$$
 
 Si on attend suffisament longtemps, l'état final i ne dépend plus de l'état initial j.<br>
-Donc $(M^{\infty})_{ij}$ ne dépend plus de j. On peut noté $(M^{\infty})_{ij}$ par ($\vec \pi, \vec \pi, ...$) avec $\vec \pi$ = $(\pi_1,\pi_2,...)$
+Donc $(M^{\infty})_{ij}$ ne dépend plus de j. On peut noter $(M^{\infty})_{ij}$ par $(\vec\pi,\vec\pi,...)$ avec $\vec \pi = (\pi_1,\pi_2,...)$.
 $$
 \begin{aligned}
 P(\infty) &= M^\infty\cdot P(0) \\
@@ -161,32 +161,32 @@ $$E(A - \lambda I)  \iff (A - \lambda I)\cdot v = 0$$
 On calcule donc les vecteurs propres de M :
 
 $$
-\begin{matrix}
+\begin{pmatrix}
 0.75528512 & 0.70000128 & -0.09852262 & -0.25754839+0.47535414i & -0.25754839-0.47535414i &-0.85
-\end{matrix}
+\end{pmatrix}
 $$
 
 $$
-\begin{matrix}
+\begin{pmatrix}
 -3.82640508\times 10^{-1} & 5.57969940\times 10^{-1} & -9.04030650\times 10^{-1} & -3.97035708\times 10^{-1}-0.07732039i & -3.97035708\times 10^{-1}+0.07732039i & -9.15181426\times 10^{-18} \\
 5.72319646\times 10^{-1} & -3.81754853\times 10^{-1} & 1.35021942\times 10^{-1} & 3.93007272\times 10^{-2}+0.02675777i & 3.93007272\times 10^{-2}-0.02675777i & -7.07106781\times 10^{-1} \\
 -3.07601626\times 10^{-1} & 4.37093602\times 10^{-1} & 2.38101306\times 10^{-1} & 6.83723701\times 10^{-1} & 6.83723701\times 10^{-1} & -9.81970491\times 10^{-17} \\
 5.72319646\times 10^{-1} & -3.81754853\times 10^{-1} & 1.35021942\times 10^{-1} & 3.93007272\times 10^{-2}+0.02675777i & 3.93007272\times 10^{-2}-0.02675777i & 7.07106781\times 10^{-1} \\
 -2.09552640\times 10^{-1} & 2.92592167\times 10^{-1} & 1.23074120\times 10^{-1} & -1.40994194\times 10^{-1}+0.39525253i & -1.40994194\times 10^{-1}-0.39525253i & 1.37578635\times 10^{-16} \\
 -2.44858362\times 10^{-1} & 3.47181536\times 10^{-1} & 2.72813604\times 10^{-1} & -2.24294652\times 10^{-1}-0.37144722i & -2.24294652\times 10^{-1}+0.37144722i & 4.21772479\times 10^{-17} \\
-\end{matrix}
+\end{pmatrix}
 $$
 
 On prend la valeur propre la plus proche de 1 en valeur absolue. Dans notre exemple, il s'agit du vecteur propre associé à -0.85 à savoir :
 $$
-\begin{matrix}
-−9.15181426 \times 10^{−18}\\
-−7.07106781 \times 10^{−1}\\
-−9.81970491 \times 10^{−17}\\
-7.07106781 \times 10^{−1}\\
-1.37578635 \times 10^{−16}\\
-4.21772479 \times 10^{−17}\\
-\end{matrix}
+\begin{pmatrix}
+-9.15181426 \times 10^{-18}\\
+-7.07106781 \times 10^{-1}\\
+-9.81970491 \times 10^{-17}\\
+7.07106781 \times 10^{-1}\\
+1.37578635 \times 10^{-16}\\
+4.21772479 \times 10^{-17}\\
+\end{pmatrix}
 $$
 
 Après un certain temps, la distribution se stabilise et les valeurs sont similaires à celles du vecteur propre associé à la valeur 1.
@@ -206,6 +206,7 @@ exemple : reddit.txt
 Dans chaque fichier, on trouve un titre pour la page, du texte et des pointeurs vers d'autres fichiers qui sont sous la forme : <br> "pointeurvers : [nomPageWeb].txt".
 
 Dans notre modélisation, les pages web pointent entre elles de la manière suivante :
+
 ![title](images/markov.jpg)
 
 Par rapport à notre choix de modélisation, on peut voir que les sites les plus populaires sont :
@@ -214,7 +215,7 @@ Par rapport à notre choix de modélisation, on peut voir que les sites les plus
 2. wikipedia (ex aequo avec 1)
 3. marmiton
 4. amazon
-5. youtube 
+5. youtube
 6. reddit
 
 Il possible d'ajouter d'autres site web en respectant la mise en forme de la modélisation des pages web.
@@ -225,18 +226,22 @@ Pour créer notre moteur de recherche, nous avons créé plusieurs fonctions don
 
 #### Function count_Nb_Pages
 La fonction count_Nb_Pages prend en paramètre :
+
 - un string correspondant au chemin du dossier contenant nos pages web.
+
 Cette fonction permet de compter le nombre de pages web contenu dans ce dossier. La fonction retourne un nombre que l'on nomme n par la suite.
 
 #### Function init_markov_chain
-La fonction init_markov_chain prend en paramètre : 
+La fonction init_markov_chain prend en paramètre :
+
 - n, le nombre de pages web
 - path, le chemin des pages web
 - alpha, le damping factor que l'on a fixé à 0.85.
 
 Cette fonction permet d'initialiser et de retourner :
-- M, une matrice correspondant à notre matrice google, 
-- order, un vecteur contenant la liste des sites. 
+
+- M, une matrice correspondant à notre matrice google,
+- order, un vecteur contenant la liste des sites.
 
 Le vecteur order permet de garder en mémoire l'ordre de lecture des différents sites web dans notre matrice M.
 
@@ -258,7 +263,7 @@ $$
 
 Le calcul de M a été réalisé de la manière que celle décrite dans la partie "Matrice Google" de ce document. Voici les étapes de calculs :
 
-On commence par créer une matrice de transition L. 
+On commence par créer une matrice de transition L.
 $$
 L =
 \begin{pmatrix}
@@ -283,7 +288,7 @@ S =
 \end{pmatrix}
 $$
 
-Enfin, pour éviter tout problème de sous-graphe, on applique la formule $ M = \alpha S + \frac{1 - \alpha}{N}  S  $ ce qui nous donne M.
+Enfin, pour éviter tout problème de sous-graphe, on applique la formule $M = \alpha S + \frac{1 - \alpha}{N}S$ ce qui nous donne M.
 $$
 \begin{matrix}
     amazon \quad&
@@ -316,18 +321,20 @@ $$
 
 #### Function find_rank
 La fonction find_rank prend en paramètre :
+
 - n, le nombre de pages web
 - path, le chemin des pages
 - M, la matrice Google.
 
 Cette fonction permet d'initialiser et de retourner :
+
 - StablePR, un vecteur contenant le score de chaque page web
 
 Pour ce faire, il nous suffit de trouver le vecteur propre de la matrice Google M avec une valeur propre associée de 1.
 
 En MatLab, la fonction eig permet de retourner les valeurs propres et vecteurs propres d'une matrice.
 $$
-X = 
+X =
 \begin{pmatrix}
     0.2659 & -0.3205 & -0.0000 & -0.0000 &  0.4676 & -0.0000\\
     0.3178 & -0.4136 &  0.7071 & -0.7071 & -0.7399 &  0.0000\\
@@ -370,9 +377,10 @@ StablePR =
 $$
 
 #### Function sort_page_search
-La fonction sort_page_search permet de chercher un mot parmi les différentes pages web et de retourner la liste des pages web contenant ce mot. 
+La fonction sort_page_search permet de chercher un mot parmi les différentes pages web et de retourner la liste des pages web contenant ce mot.
 
 La fonction prend en paramètre :
+
 - hdata : le mot que l'on cherhce
 - StablePR : le page rank des pages web
 - path : le chemin de chaque page web
@@ -380,6 +388,7 @@ La fonction prend en paramètre :
 - n : le nombre de pages web
 
 La fonction renvoie :
+
 - result, un vecteur contenant la liste des pages web contenant le mot cherché et est triée de manière décroissante en fonction du page rank des pages web.
 
 
@@ -412,18 +421,21 @@ Par exemple, on  23,3% de la population se trouve initialement sur amazon.
 Note : la somme des éléments du vecteur P vaut 1.
 
 #### Moteur de recherche en html
-Afin de modéliser le moteur de recherche Google, une page html a été créée pour ressembler le plus possible à l'original. En effet, une barre de recherche permet d'obtenir la liste des sites qui contiennent le mot recherché. 
+Afin de modéliser le moteur de recherche Google, une page html a été créée pour ressembler le plus possible à l'original. En effet, une barre de recherche permet d'obtenir la liste des sites qui contiennent le mot recherché.
 
-Lorsqu'on lance notre moteur de recherche, une modélisation de l'évolution de la distribution de la population sur les différents sites web au cours du temps est faite. On peut ainsi voir sur quel site vont les personnes.
+Lorsqu'on lance notre moteur de recherche, une modélisation de l'évolution de la distribution de la population sur les différents sites web au cours du temps est faite. On peut ainsi voir sur quels sites vont les personnes.
 
-Pour notre modélisation, et pour la suite, le nombre de personnes total ne change pas et est fixé par le paramètre pop_tot.
+Pour notre modélisation, et pour la suite, le nombre total de personnes ne change pas et est fixé par le paramètre pop_tot.
+
+Les deux représentations graphiques sont corrélées et les couleurs sont cohérentes entre les deux fenêtres.
+
+![title](images/graphes_cercles.png)
+
+Dans la première fenêtre, la taille des cercles correspond à la quantité de personnes qui visitent le site en question.
 
 ![title](images/graphes.png)
 
-La taille des 
-
-\+ Dire que les couleurs sont cohérentes entre elles
-
+Dans la seconde fenêtre, on voit l'évolution de la population sur les sites en fonction du temps.
 
 #### Obtention du mot cherché et retour des pages pertinentes
 Une fois qu'un mot X a été ajouté dans la barre de recherche et que le bouton "search" a été cliqué, la fonction request va être appelée. 
