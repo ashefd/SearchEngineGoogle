@@ -545,9 +545,9 @@ Nous pensons que ce projet aurait pu être utile pour une entreprise. Par exempl
 $$\pagebreak$$
 
 # Bibliographie
-*"PageRank algorithm, fully explained"*, towards data science, Amrani Amine, 20 décembre 2020. Disponible sur : https://towardsdatascience.com/pagerank-algorithm-fully-explained-dc794184b4af
+*"PageRank algorithm, fully explained"*, **towards data science**, Amrani Amine, 20 décembre 2020. Disponible sur : https://towardsdatascience.com/pagerank-algorithm-fully-explained-dc794184b4af
 
-*Cours de Data Science*, Monsieur Desesquelles, délivré septembre 2021.
+*Cours de Data Science*, **Pierre Desesquelles**, délivré septembre 2021.
 
 *"Create HTML file that can trigger or respond to Data changes"*, MatLab Documentation. Disponible ici : https://fr.mathworks.com/help/matlab/creating_guis/create-an-html-file-that-sets-data-or-responds-to-data-changes-from-matlab.html
 
