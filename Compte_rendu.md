@@ -524,6 +524,11 @@ Après un certain temps, on peut voir que pour toutes requêtes effectuées, le 
 
 ![Résultat de recherche à l'état d'équilibre](images/4.png){ width=70% }
 
+Peu importe le $P(0)$ initial, on retournera toujours à l'état d'équilibre. Comme expliqué précédemment, le temps nécessaire pour diviser par deux la distance à l'équilibre est de $T_{1/2} = 4.6778$ minutes et pour la diviser par 10, le temps est de $T_{1/10} = 15.5392$ minutes en supposant que $\Delta t = 20$ minutes.
+
+On constate que plus le pagerank d'un site est grand, plus il y a de personnes sur ce site.
+
+
 Une vidéo de démonstration a été réalisée et est disponible dans le code source du projet.
 
 $$\pagebreak$$
