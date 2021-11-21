@@ -1,5 +1,6 @@
 # SearchEngine
 
+[ENDED]
 Authors:
 CABRERA Cyril
 LOK Tshanon
