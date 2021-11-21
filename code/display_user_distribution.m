@@ -1,25 +1,28 @@
 %% Function display_user_distribution
+% Permet d'afficher sur la page l'evolution de la répartition de la population
 % order : order of the web site we want to evaluate
+% TotalFrame : le nombre d'images pour faire une animation (30 suffit)
+% order : vecteur contenant l'ordre de lectures
 % P : population vector
 % n : number of web site
 % M : Google matrix
 function display_user_distribution(TotalFrame, order, P, n, M, ax1, ax2, pop_tot)
-    
+
     %f = figure;
     %g = figure;
-    
-    
+
+
     % Mis en place de la position de la population dans chaque site
     angles = linspace(0, 2*pi, 360); % 360 is the total number of points
     radius = 80; % rayon du grand cercle
     xCenter = 110;
     yCenter = 110;
-    x = radius * cos(angles) + xCenter; 
+    x = radius * cos(angles) + xCenter;
     y = radius * sin(angles) + yCenter;
     c = rand(n, 3);
-    
+
     totalEvolution = zeros(n,1);
-    
+
     %  Mis en place d'une animation
     animationWriter = VideoWriter('animation_file');
     open(animationWriter);
@@ -35,12 +38,12 @@ function display_user_distribution(TotalFrame, order, P, n, M, ax1, ax2, pop_tot
         axis manual;
         %axis([0 250 -20 numberOfFrames]);
         xAxis = linspace(0, TotalFrame, numberOfFrames );
-        axes('ColorOrder',c,'NextPlot','replacechildren') 
+        axes('ColorOrder',c,'NextPlot','replacechildren')
         %g.Position = [1000 500 500 500];
-        
+
         plot(ax2, xAxis, totalEvolution');
-        
-        
+
+
         %set(0, 'CurrentFigure', f)
         %clf;
         %f.Position = [500 500 500 500];
@@ -48,36 +51,36 @@ function display_user_distribution(TotalFrame, order, P, n, M, ax1, ax2, pop_tot
         %axis equal;
         %axis manual;
         %axis([-20 250 -20 250]);
-        
+
         % Choose web site circle position
         indexes = zeros(1,n); % position index
         for i = 1 : n
             indexes(i) = length(angles) * i / n; %Array of index in circle
         end
-        
+
         xPos = x(indexes);  % x position value for a web site
         yPos = y(indexes);  % y position value for a web site
         r = P * pop_tot * 2 / n; % radius of the web site circle (according to population)
-        
+
         for i = 1:n
             for j = i:n
                 line(ax1, [xPos(i) xPos(j)], [yPos(i) yPos(j)],'color','c','LineWidth',1) % Red line from (0,9) to (10,9)
             end
         end
-        
+
         % Plot for each web site its circle
         for j = 1:n
             plotcircle(ax1, r(j),xPos(j),yPos(j),order(j),c(j, :)); % plot the circle
         end
-        
+
         P = M * P; % change the value of P
-        
+
         frame = getframe(gcf);
         writeVideo(animationWriter, frame);
-        
+
     end
     close(animationWriter);
-    
+
 end
 
 

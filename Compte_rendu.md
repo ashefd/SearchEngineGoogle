@@ -17,90 +17,87 @@ Dans ce projet de Data Science, nous avons décidé de recréer les caractérist
 L'algorithme "PageRank" a été développé par Google afin de classer un certains nombres de sites web en fonction de leur popularité.$\\$
 La popularité d'une page web est définie par le nombre de références qui y sont faites sur tous les autres sites repertoriés.
 
-Considérons par exemple un ensemble de sites web A, B, C, D, E et F qui pointent les uns vers les autres. Si A est référencé sur tous les autres sites, alors il aura une plus grande popularité que les autres. Lors d'une recherche, A sera classé plus haut que B, C, D, E et F dans les résultats.
+Considérons par exemple un ensemble de sites web A, B, C et D qui pointent les uns vers les autres. Si A est référencé sur tous les autres sites, alors il aura une plus grande popularité que les autres. Lors d'une recherche, A sera classé plus haut que B, C et D dans les résultats.
 
 Le web peut être assimilé à une chaîne de Markov où chaque point représente une page web et chaque transition représente le lien de référence entre ces pages. Donc si A pointe vers B, alors A fait référence à B sur sa page web. À ces transitions sont associées des probabilités qui sont la répartition équilibrée de la probabilité d'aller vers une page référencée.
 
 **Mise en situation :**
-Supposons que l'on ait 6 pages web qui pointent les unes vers les autres de la manière suivante.
+Supposons que l'on ait 4 pages web qui pointent les unes vers les autres de la manière suivante.
 
-
-![Exemple de chaîne de Markov](images/exemple.png){ width=250px }
+![Exemple de chaîne de Markov](images/exemple.png){ width=60% }
 
 Dans notre cas, on retrouve la matrice de transition suivante :
+
 $$
 \space \space
 \begin{matrix}
-A & B & C & D & E & F
+A & B & C & D
 \end{matrix}
 $$
 $$
 L =
 \begin{pmatrix}
-0 & 0 & \frac{1}{2}& 0 & 0 & \frac{1}{2}\\
-0 & 0 & 0   & 1 & 0 & 0\\
-0 & 0 & 0   & 0 & 1 & 0\\
-0 & 1 & 0   & 0 & 0 & 0\\
-0 & 0 & 0   & 0 & 0 & \frac{1}{2}\\
-0 & 0 & \frac{1}{2} & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 1\\
+0 & 0 & 1 & 0\\
 \end{pmatrix}
 \begin{matrix}
-A \\ B \\ C \\ D \\ E \\ F
+A \\ B \\ C \\ D
 \end{matrix}
 $$
 
-Comme on peut le constater, la somme des éléments de la première colonne vaut 0 car l'élément A ne fait référence à aucun autre état.
-Le problème est que l'algorithme ne pourra pas converger.$\\$
+Comme on peut le constater, la somme des éléments de la première colonne vaut 0 car l'élément A ne fait référence à aucun autre état.$\\$
 Pour pallier ce problème, on suppose ainsi que tous les noeuds qui ne font référence à aucun état font maintenant référence à tous les états. On obtient ainsi la matrice S suivante :
 $$
 \space \space
 \begin{matrix}
-A & B & C & D & E & F
+A & B & C & D
 \end{matrix}
 $$
 $$
-S = \begin{pmatrix}
-\frac{1}{6} & 0 & \frac{1}{2}& 0 & 0 & \frac{1}{2}\\
-\frac{1}{6} & 0 & 0   & 1 & 0 & 0\\
-\frac{1}{6} &0 & 0  & 0 & 1 & 0\\
-\frac{1}{6} & 1 & 0   & 0 & 0 & 0\\
-\frac{1}{6} & 0 & 0   & 0 & 0 & \frac{1}{2}\\
-\frac{1}{6} & 0 & \frac{1}{2} & 0 & 0 & 0\\
+S =
+\begin{pmatrix}
+1/4 & 1 & 0 & 0 \\
+1/4 & 0 & 0 & 0 \\
+1/4 & 0 & 0 & 1 \\
+1/4 & 0 & 1 & 0 \\
 \end{pmatrix}
 \begin{matrix}
-A \\ B \\ C \\ D \\ E \\ F
+A \\ B \\ C \\ D
 \end{matrix}
 $$
 
-Enfin, on remarque qu'il y a deux sous-graphes qui se dressent.
-Le graphe [A,C,E,F] et [B,D].$\\$
-On ne peut pas passer du graphe [A,C,E,F] à [B,D] et inversement. Google a donc mis en place une formule :
+De plus, on remarque qu'il y a deux sous-graphes qui se dressent.
+Le graphe [A,B] et [C,D].$\\$
+On ne peut pas passer du graphe [A,B] à [C,D] et inversement. Google a donc mis en place une formule :
 
-$$ M = \alpha S + \frac{1 - \alpha}{N}  S  $$
+$$
+M = \alpha S + (1 - \alpha) \times \frac{ones(N)}{N}
+$$
 
-avec alpha qui est un "damping factor" :
+avec $\alpha$ qui est un "damping factor" :
 $$\alpha = 0.85$$
 On obtient ainsi la matrice Google M suivante :
 $$
 \begin{matrix}
-\qquad A \qquad & B \qquad & C \qquad & D \qquad & E \qquad & \qquad F
+\qquad A \qquad & B \qquad & C \qquad & D
 \end{matrix}
 $$
 $$
-M = \begin{pmatrix}
-0.116667 & -0.025 & 0.4 & -0.025 & -0.025 & 0.4\\
-0.116667 & -0.025 & -0.025   & 0.825 & -0.025 & -0.025\\
-0.116667 & -0.025 & -0.025  & -0.025 & 0.825 & -0.025\\
-0.116667 & 0.825 & -0.025 & -0.025 & -0.025 & -0.025\\
-0.116667 & -0.025 & -0.025   & -0.025 & -0.025 & 0.4 \\
-0.116667 & -0.025 & 0.4 & -0.025 & -0.025 & -0.025\\
+M =
+\begin{pmatrix}
+0.25 & 0.8875 & 0.0375 & 0.0375\\
+0.25 & 0.0375 & 0.0375 & 0.0375\\
+0.25 & 0.0375 & 0.0375 & 0.8875\\
+0.25 & 0.0375 & 0.8875 & 0.0375\\
 \end{pmatrix}
 \begin{matrix}
-A \\ B \\ C \\ D \\ E \\ F
+A \\ B \\ C \\ D
 \end{matrix}
 $$
 On se retrouve enfin avec une unique chaine de Markov régulière : pas d'état absorbant et pas de chaine secondaire.$\\$
-Tous les états sont donc réguliers, c'est-à-dire que ils peuvent tous être quittés ou rejoints.
+Tous les états sont donc réguliers, c'est-à-dire qu'ils peuvent tous être quittés ou rejoints.
 
 ### Page Rank
 Nous avons maintenant en place la matrice M correspondant à la matrice Google.$\\$
@@ -114,23 +111,25 @@ On considère notre matrice Google M et un vecteur P(t), correspondant à la ré
 
 À un temps t donné, si on souhaite connaitre la répartition de la population dans les différents sites web après un temps $\Delta t = 1$, il faudrait effectuer cette opération :
 $$P(t + \Delta t) = M \cdot P(t)$$
-On obtient donc à la période suivante :
+On obtient donc au pas de temps suivant :
 $$
-P(t + 2 \Delta t) = M² \cdot P(t)\\$$
+P(t + 2 \Delta t) = M^2 \cdot P(t)\\$$
 
 Comme la matrice M est indépendante du temps, c'est-à-dire homogène, on en déduit la formule suivante :
 $$P(x) = M^x P(0)$$
-avec $x$ le pas de temps
+avec $x$ le pas de temps et $P(0)$ la répartition initiale de population.
 
-Donc, après plusieurs pas de temps, on a une probabilité de $(M^{x})_{ij}$, pour passer de l'état j à i en x pas de temps.
+Donc, après $x$ pas de temps, on a une probabilité de $(M^{x})_{ij}$, pour passer de l'état j à i.
 
-On remarque qu'à partir d'un certain temps t, la répartition de la population ne varie plus beaucoup : c'est notre **état d'équilibre**.
+On remarque qu'à partir d'un certain temps $x$, la répartition de la population $P(x)$ ne varie plus beaucoup : c'est notre **état d'équilibre**.
 
-Pour déterminer cet état d'équilibre, il faudrait calculer :
-$$P(\infty) = M^\infty P(0)$$
+Pour déterminer cet état d'équilibre, il faudrait faire tendre $x$ vers $+\infty$, et donc calculer :
+$$\lim_{x \to +\infty} P(x) = M^x P(0)$$
 
-Si on attend suffisament longtemps, l'état final i ne dépend plus de l'état initial j.$\\$
-Donc $(M^{\infty})_{ij}$ ne dépend plus de j. On peut noter $(M^{\infty})_{ij}$ par $(\vec\pi,\vec\pi,...)$ avec $\vec \pi = (\pi_1,\pi_2,...)$.
+Pour plus de simplicité, on notera $P(\infty)$ à la place de $\lim_{x \to +\infty} P(x)$.
+
+Si on attend suffisament longtemps, l'état final i ne dépend plus de l'état initial j.
+Donc $(M^{\infty})_{ij}$ ne dépend plus de j. On peut noter $(M^{\infty})_{ij}$ par $\pi_{i}$ avec $\vec \pi = (\pi_1,\pi_2,...)$. Donc $M^\infty = (\vec \pi, \vec \pi, ...)$.
 $$
 \begin{aligned}
 P(\infty) &= M^\infty\cdot P(0) \\
@@ -154,40 +153,34 @@ M \cdot v &= \lambda v\\
 \end{aligned}
 $$
 
-Les vecteurs propres et les valeurs propres peuvent être déterminés par $E(M-\lambda I)$.$\\$
-Le noyau d'une matrice A est défini par :
-$$Ker(A) = \left\{v \in R^n | \forall u \in A, u \cdot v = 0 \right\}$$
-On sait également que $Ker(A) = E(A- \lambda I)$ et que :
-$$E(A - \lambda I)  \iff (A - \lambda I)\cdot v = 0$$
+Les vecteurs propres et les valeurs propres peuvent être déterminés. On cherche donc les $\lambda_i$ tel que :
+$$det(M - \lambda_i I) = 0$$ et un vecteur $v$ associé à $\lambda_i$ tel que :
+$$ker(M - \lambda_i I)  \iff (M - \lambda_i I)\cdot v = 0$$
 
 On calcule donc les vecteurs propres de M :
 
 $$
-\begin{pmatrix}
-0.75528512 & 0.70000128 & -0.09852262 & -0.25754839+0.47535414i & -0.25754839-0.47535414i &-0.85
-\end{pmatrix}
+\begin{matrix}
+-0.3318 \qquad & 0.5443\qquad & 1\qquad & -0.85\qquad
+\end{matrix}
 $$
 
 $$
 \begin{pmatrix}
--3.82640508\times 10^{-1} & 5.57969940\times 10^{-1} & -9.04030650\times 10^{-1} & -3.97035708\times 10^{-1}-0.07732039i & -3.97035708\times 10^{-1}+0.07732039i & -9.15181426\times 10^{-18} \\
-5.72319646\times 10^{-1} & -3.81754853\times 10^{-1} & 1.35021942\times 10^{-1} & 3.93007272\times 10^{-2}+0.02675777i & 3.93007272\times 10^{-2}-0.02675777i & -7.07106781\times 10^{-1} \\
--3.07601626\times 10^{-1} & 4.37093602\times 10^{-1} & 2.38101306\times 10^{-1} & 6.83723701\times 10^{-1} & 6.83723701\times 10^{-1} & -9.81970491\times 10^{-17} \\
-5.72319646\times 10^{-1} & -3.81754853\times 10^{-1} & 1.35021942\times 10^{-1} & 3.93007272\times 10^{-2}+0.02675777i & 3.93007272\times 10^{-2}-0.02675777i & 7.07106781\times 10^{-1} \\
--2.09552640\times 10^{-1} & 2.92592167\times 10^{-1} & 1.23074120\times 10^{-1} & -1.40994194\times 10^{-1}+0.39525253i & -1.40994194\times 10^{-1}-0.39525253i & 1.37578635\times 10^{-16} \\
--2.44858362\times 10^{-1} & 3.47181536\times 10^{-1} & 2.72813604\times 10^{-1} & -2.24294652\times 10^{-1}-0.37144722i & -2.24294652\times 10^{-1}+0.37144722i & 4.21772479\times 10^{-17} \\
+ 0.8235 & -0.6870 & -0.1915 & 0.0000\\
+ -0.5273 & -0.2682 & -0.1035 & -0.0000\\
+ -0.1481 & 0.4776 & -0.6901 & -0.7071\\
+ -0.1481 & 0.4776 & -0.6901 & 0.7071\\
 \end{pmatrix}
 $$
 
-On prend la valeur propre la plus proche de 1 en valeur absolue. Dans notre exemple, il s'agit du vecteur propre associé à -0.85 à savoir :
+On prend la valeur propre la plus proche de 1 en valeur absolue. Dans notre exemple, il s'agit du vecteur propre associé à 1 à savoir :
 $$
 \begin{pmatrix}
--9.15181426 \times 10^{-18}\\
--7.07106781 \times 10^{-1}\\
--9.81970491 \times 10^{-17}\\
-7.07106781 \times 10^{-1}\\
-1.37578635 \times 10^{-16}\\
-4.21772479 \times 10^{-17}\\
+-0.1915\\
+-0.1035\\
+-0.6901\\
+-0.6901\\
 \end{pmatrix}
 $$
 
@@ -220,7 +213,7 @@ Par rapport à notre choix de modélisation, on peut voir que les sites les plus
 5. youtube
 6. reddit
 
-Il possible d'ajouter d'autres site web en respectant la mise en forme de la modélisation des pages web.
+Il est possible d'ajouter d'autres site web en respectant la mise en forme de la modélisation des pages web.
 
 
 ### Fonctionnalités
@@ -229,9 +222,9 @@ Pour créer notre moteur de recherche, nous avons créé plusieurs fonctions don
 ### Function count_Nb_Pages
 La fonction count_Nb_Pages prend en paramètre :
 
-- un string correspondant au chemin du dossier contenant nos pages web.
+- path, une chaîne de caractères correspondant au chemin du dossier contenant nos pages web.
 
-Cette fonction permet de compter le nombre de pages web contenu dans ce dossier. La fonction retourne un nombre que l'on nomme n par la suite.
+Cette fonction retourne le nombre de pages web dans le dossier, n.
 
 ### Function init_markov_chain
 La fonction init_markov_chain prend en paramètre :
@@ -242,12 +235,12 @@ La fonction init_markov_chain prend en paramètre :
 
 Cette fonction permet d'initialiser et de retourner :
 
-- M, une matrice correspondant à notre matrice google,
+- M, une matrice correspondant à notre matrice Google,
 - order, un vecteur contenant la liste des sites.
 
 Le vecteur order permet de garder en mémoire l'ordre de lecture des différents sites web dans notre matrice M.
 
-Explications:
+Explications :
 La matrice M est une matrice de transition. On passe d'un état A à un état B via les références de chaque page. Pour être sûr de l'ordre des états dans la matrice M, on met en place un vecteur order qui permet de garder en mémoire l'ordre.
 
 Dans notre modèle, le vecteur order a été fixé comme cela:
@@ -263,7 +256,7 @@ order =
 \end{pmatrix}
 $$
 
-Le calcul de M a été réalisé de la manière que celle décrite dans la partie "Matrice Google" de ce document. Voici les étapes de calculs :
+Le calcul de M a été réalisé de la même manière que celle décrite dans la partie "Matrice Google" de ce document. Voici les étapes de calculs :
 
 On commence par créer une matrice de transition L.
 $$
@@ -277,7 +270,7 @@ L =
       0 & 0.5000 & 0.5000 &      0 &      0 &      0\\
 \end{pmatrix}
 $$
-La somme des colonnes ne valent pas toutes 1. On fait donc pointer les états associés à tous les états. On obtient la matrice S suivante :
+La somme des colonnes ne valent pas toutes 1. On fait donc pointer ces états à tous les autres états. On obtient la matrice S suivante :
 $$
 S =
 \begin{pmatrix}
@@ -290,7 +283,8 @@ S =
 \end{pmatrix}
 $$
 
-Enfin, pour éviter tout problème de sous-graphe, on applique la formule $M = \alpha S + \frac{1 - \alpha}{N}S$ ce qui nous donne M.
+Enfin, pour éviter tout problème de sous-graphe, on applique la formule $M = \alpha S + (1 - \alpha) \times \frac{ones(N)}{N}$ ce qui nous donne M.
+$$\pagebreak$$
 $$
 \begin{matrix}
     amazon \quad&
@@ -391,7 +385,7 @@ La fonction prend en paramètre :
 
 La fonction renvoie :
 
-- result, un vecteur contenant la liste des pages web contenant le mot cherché et est triée de manière décroissante en fonction du page rank des pages web.
+- result, un vecteur contenant la liste des pages web contenant le mot cherché, triée de manière décroissante en fonction du page rank des pages web.
 
 
 ### L'interface graphique
@@ -418,9 +412,9 @@ P =
     youtube\\
 \end{matrix}
 $$
-Par exemple, on  23,3% de la population se trouve initialement sur amazon.
+Par exemple, on a 23,3% de la population qui se trouve initialement sur amazon.
 
-Note : la somme des éléments du vecteur P vaut 1.
+*Note :* la somme des éléments du vecteur P vaut 1.
 
 ### Moteur de recherche en html
 Afin de modéliser le moteur de recherche Google, une page html a été créée pour ressembler le plus possible à l'original. En effet, une barre de recherche permet d'obtenir la liste des sites qui contiennent le mot recherché.
@@ -431,7 +425,7 @@ Pour notre modélisation, et pour la suite, le nombre total de personnes ne chan
 
 Les deux représentations graphiques sont corrélées et les couleurs sont cohérentes entre les deux fenêtres.
 
-![Graphe du vecteur population sous formes de chaîne](images/graphes_cercles.png){ width=250px } \ ![Graphe du vecteur population en fonction du temps](images/graphes.png){ width=250px }
+![Graphe du vecteur population sous formes de chaîne](images/graphes_cercles.png){ width=50% } \ ![Graphe du vecteur population en fonction du temps](images/graphes.png){ width=50% }
 
 Dans la première fenêtre, on observe un graphe représentant les liens entre les différentes pages. La taille des cercles correspond à la quantité de personnes qui visitent le site en question.
 
@@ -448,14 +442,14 @@ $$
 Une fois qu'un mot X a été ajouté dans la barre de recherche et que le bouton "search" a été cliqué, la fonction request va être appelée.
 
 Le mot X va être recherché parmi toutes les pages web à l'aide de la fonction sort_page_search.
-Cette fonction va lister les pages qui contiennent X. Cette liste va ensuite être trié en fonction du page rank (donc en fonction de StablePR) de manière décroissante.
+Cette fonction va lister les pages qui contiennent X. Cette liste va ensuite être triée en fonction du page rank (donc en fonction de StablePR) de manière décroissante.
 
 Une fois la liste établie, les résultats sont envoyés vers la page html pour que ces résultats soient affichés.
 
 
-De plus, la modélisation de l'évolution de la répartition de la population en fonction du temps va être relancé avec une distribution P initiale fixée en fonction de la liste des sites contenants le mot X cherché.
+De plus, la modélisation de l'évolution de la répartition de la population en fonction du temps va être relancée avec une distribution P initiale fixée en fonction de la liste des sites contenants le mot X cherché.
 
-Par exemple, si les sites contenant le mot X est : [amazon, reddit, youtube], alors le vecteur P est donné par :
+Par exemple, si les sites contenant le mot X sont : [amazon, reddit, youtube], alors le vecteur P est donné par :
 $$
 P(0) =
 \begin{pmatrix}
@@ -493,7 +487,7 @@ On peut le calculer de la manière suivante :
 $T_{1/2} = - \frac{\Delta t \times ln(2)}{ln(| \lambda_2 |)}$ avec $\lambda_2$ la deuxième plus grande valeur propre de $D$ après $\lambda_1 = 1$.
 
 $D = D_{\vec r} [Z^{diag} \vec 1 - Z \cdot I]$ avec $Z = (M^{\infty} - M + I)^{-1}$, $r$ tel que $r_i = \Delta t / \pi_i$
-On prend la deuxième plus grande (en valeur absolu) valeur propre.
+On prend la deuxième plus grande (en valeur absolue) valeur propre.
 
 Dans notre modèle,
 $T_{1/2} = 4.6778$ minutes et $T_{1/10} = 15.5392$ minutes en supposant que $\Delta t = 20$ minutes.
@@ -514,21 +508,23 @@ Le programme est donc bien fonctionnel. Il est possible de faire des recherches 
 
 Au début du programme, on arrive donc sur la page d'accueil du moteur de recherche. On peut voir l'évolution du classement des pages arriver à l'équilibre.
 
-![Page d'accueil](images/1.png)
+![Page d'accueil](images/1.png){ width=70% }
 
 On est ensuite invité à entrer un mot-clé pour faire une recherche.
 
-![Entrée de mots-clés](images/2.png)
+![Entrée de mots-clés](images/2.png){ width=70% }
 
 Lorsque l'on lance la recherche, on peut voir l'état initial du vecteur de population au temps t = 0.
 
 Sur la page principale, on observe les résultats fournis par le moteur de recherche.
 
-![Résultat de recherche à l'état initial P(0)](images/3.png)
+![Résultat de recherche à l'état initial P(0)](images/3.png){ width=70% }
 
 Après un certain temps, on peut voir que pour toutes requêtes effectuées, le vecteur population arrive au même état d'équilibre correspondant au classement des pages stable déduit avec la matrice Google.
 
-![Résultat de recherche à l'état d'équilibre](images/4.png)
+![Résultat de recherche à l'état d'équilibre](images/4.png){ width=70% }
+
+Une vidéo de démonstration a été réalisée et est disponible dans le code source du projet.
 
 $$\pagebreak$$
 
@@ -546,17 +542,17 @@ Il y a certains points que nous aurions aimé améliorer sur ce projet pour alle
 
 Nous pensons que ce projet aurait pu être utile pour une entreprise. Par exemple pour créer un système interne permettant de faire des liens entre des documents contenus dans des archives et de faire des recherches pour retrouver ceux qui nous intéressent en établissant une hiérarchie d'utilité dans les résultats.
 
+$$\pagebreak$$
+
 # Bibliographie
-source : https://www.google.com/search/howsearchworks/algorithms/
+*"PageRank algorithm, fully explained"*, towards data science, Amrani Amine, 20 décembre 2020. Disponible sur : https://towardsdatascience.com/pagerank-algorithm-fully-explained-dc794184b4af
 
-source : "PageRank algorithm, fully explained", toward data science, Amrani Amine, 20 décembre 2020. Disponible sur : https://towardsdatascience.com/pagerank-algorithm-fully-explained-dc794184b4af
+*Cours de Data Science*, Monsieur Desesquelles, délivré septembre 2021.
 
-source : Cours de Data Science par Monsieur Desesquelles, délivré septembre 2021.
+*"Create HTML file that can trigger or respond to Data changes"*, MatLab Documentation. Disponible ici : https://fr.mathworks.com/help/matlab/creating_guis/create-an-html-file-that-sets-data-or-responds-to-data-changes-from-matlab.html
 
-source : "Create HTML file that can trigger or respond to Data changes" MatLab Documentation. Disponible ici : https://fr.mathworks.com/help/matlab/creating_guis/create-an-html-file-that-sets-data-or-responds-to-data-changes-from-matlab.html
+*"Create HTML file that can trigger or respond to Data changes"*, MatLab Documentation. Disponible ici : https://fr.mathworks.com/help/matlab/creating_guis/create-an-html-file-that-sets-data-or-responds-to-data-changes-from-matlab.html
 
-source : "Create HTML file that can trigger or respond to Data changes" MatLab Documentation. Disponible ici : https://fr.mathworks.com/help/matlab/creating_guis/create-an-html-file-that-sets-data-or-responds-to-data-changes-from-matlab.html
+*"uihtml"* MatLab Documentation. Disponible ici : https://fr.mathworks.com/help/matlab/ref/uihtml.html
 
-source : "uihtml" MatLab Documentation. Disponible ici : https://fr.mathworks.com/help/matlab/ref/uihtml.html
-
-source : "How to create a filled circle?". MatLLab Answers. Disponible ici: https://fr.mathworks.com/matlabcentral/answers/437523-how-to-create-a-filled-circle
+*"How to create a filled circle?"* MatLab Answers. Disponible ici: https://fr.mathworks.com/matlabcentral/answers/437523-how-to-create-a-filled-circle

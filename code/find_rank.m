@@ -1,3 +1,7 @@
+%% Fonction find_rank
+% Permet de trouver le rang de chaque page
+
+
 
 function StablePR = find_rank(n, path, M)
     StablePR = zeros(n,1);
@@ -11,5 +15,5 @@ function StablePR = find_rank(n, path, M)
         end
     end
     StablePR = V(:,Ihighest);
- 
+
 end
