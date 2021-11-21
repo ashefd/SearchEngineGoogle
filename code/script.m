@@ -64,6 +64,7 @@ T2 = - dt * log(2) / log(lambda2)       % Temps pour diviser par deux la distanc
 T10 = - dt * log(10) / log(lambda2)     % Temps pour diviser par dix la distance à l'equilibre
 
 %% Display search page %%
+
 fig = uifigure;
 fig.Position = [00 -10 1920 1080];
 

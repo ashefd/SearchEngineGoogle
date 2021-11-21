@@ -12,3 +12,8 @@ La popularité et le page_rank seront mis à jour au fur et à mesure des recher
 
 Objectifs :
 Les objectifs de ce projet est d'apprendre à utiliser les matrices de Markov de manière ludique.
+
+
+Sur Windows : pas de problème particulier
+Sur Linux : attention, les uihtml ne fonctionne pas. Il faut mettre en commentaire une partie du code
+Sur Mac : ???
